@@ -1,14 +1,1 @@
-@font-face {
-  font-family: Raleway;
-  src: url("../../fonts/Raleway-VariableFont_wght.ttf");
-}
-.start {
-  font-family: Raleway;
-  font-weight: 800;
-}
-
-.end {
-  font-family: Raleway;
-  font-style: italic;
-  font-weight: 800;
-}
+@import url("./fonts.css");
