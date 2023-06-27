@@ -7,7 +7,103 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="wrapper">
+        <header class="header">
+            <div>Trello</div>
+            <div class="time" id="" >12:34</div>
+        </header>
+
+
+
+        <main class="main">
+            <div class="todoAdd todoAll">
+                <div class="todoAdd__header todoAll__header">
+                    TODO:<span id="number">0</span>
+                </div>
+                
+                <div class="todoAdd__content todoAll__content">
+                    <div class="todoAdd__todo todo">
+                        <div class="todo__line">
+                            <span>Title</span>
+                            <div>
+                                <button type="button">EDIT</button>
+                                <button type="button">DELETE</button>
+                            </div>
+                        </div>
+
+                        <div class="todo__line">
+                            <span>Description</span>
+                            <button type="button">></button>
+                        </div>
+
+                        <div class="todo__line">
+                            <span>User</span>
+                            <div class="date"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="todoAdd__footer todoAll__footer">
+                    <button type="button" class="todoAll_btn">Add todo</button>
+                </div>
+            </div>
+
+            <div class="todoProgress todoAll">
+                <div class="todoProgress__header todoAll__header">
+                    IN PROGRESS:<span>0</span>
+                </div>
+
+                <div class="todoProgress__content todoAll__content">
+                    <div class="todo">
+                        <div class="todo__line">
+                            <span>Title</span>
+                            <div>
+                                <button type="button">BACK</button>
+                                <button type="button">DELETE</button>
+                            </div>
+                        </div>
     
+                        <div class="todo__line">
+                            <span>Description</span>
+                        </div>
+    
+                        <div class="todo__line">
+                            <span>User</span>
+                            <div class="date"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="todoDone todoAll">
+                <div class="todoDone__header todoAll__header">
+                    DONE:<span>0</span>
+                </div>
+
+                <div class="todoDone__content todoAll__content">
+                    <div class="todo">
+                        <div class="todo__line">
+                            <span>Title</span>
+                            <button type="button">DELETE</button>
+                        </div>
+    
+                        <div class="todo__line">
+                            <span>Description</span>
+                        </div>
+    
+                        <div class="todo__line">
+                            <span>User</span>
+                            <div class="date"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="todoDone__footer todoAll__footer">
+                    <button type="button" class="todoAll_btn">Delete all</button>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <script src="./js/index.js"></script>
 </body>
