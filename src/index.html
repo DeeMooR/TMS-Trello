@@ -9,97 +9,107 @@
 <body>
     <div class="wrapper">
         <header class="header">
-            <div>Trello</div>
+            <div class="logo-trello">Trello</div>
             <div class="time" id="" >12:34</div>
         </header>
 
-
-
         <main class="main">
-            <div class="todoAdd todoAll">
-                <div class="todoAdd__header todoAll__header">
-                    TODO:<span id="number">0</span>
+            <div class="list-add list">
+                <div class="list-add__header list__header">
+                    TODO:<span id="number">2</span>
                 </div>
                 
-                <div class="todoAdd__content todoAll__content">
-                    <div class="todoAdd__todo todo">
-                        <div class="todo__line">
+                <div class="list-add__content list__content">
+                    <div class="list-add__card card">
+                        <div class="card__item">
                             <span>Title</span>
                             <div>
-                                <button type="button">EDIT</button>
-                                <button type="button">DELETE</button>
+                                <button type="button" class="card-item__btn">EDIT</button>
+                                <button type="button" class="card-item__btn">DELETE</button>
                             </div>
                         </div>
-
-                        <div class="todo__line">
+                        <div class="card__item">
                             <span>Description</span>
-                            <button type="button">></button>
+                            <button type="button" class="card-item__btn card-item__btn-apply">></button>
                         </div>
-
-                        <div class="todo__line">
+                        <div class="card__item">
                             <span>User</span>
-                            <div class="date"></div>
+                            <div class="date">Time</div>
+                        </div>
+                    </div>
+
+                    <div class="list-add__card card">
+                        <div class="card__item">
+                            <span>Title</span>
+                            <div>
+                                <button type="button" class="card-item__btn">EDIT</button>
+                                <button type="button" class="card-item__btn">DELETE</button>
+                            </div>
+                        </div>
+                        <div class="card__item">
+                            <span>Description</span>
+                            <button type="button" class="card-item__btn card-item__btn-apply">></button>
+                        </div>
+                        <div class="card__item">
+                            <span>User</span>
+                            <div class="date">Time</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="todoAdd__footer todoAll__footer">
-                    <button type="button" class="todoAll_btn">Add todo</button>
+                <div class="list-add__footer list__footer">
+                    <button type="button" class="list__btn">Add todo</button>
                 </div>
             </div>
 
-            <div class="todoProgress todoAll">
-                <div class="todoProgress__header todoAll__header">
-                    IN PROGRESS:<span>0</span>
+            <div class="list-progress list">
+                <div class="list-progress__header list__header">
+                    IN PROGRESS:<span>1</span>
                 </div>
 
-                <div class="todoProgress__content todoAll__content">
-                    <div class="todo">
-                        <div class="todo__line">
+                <div class="list-progress__content list__content">
+                    <div class="list-progress__card card">
+                        <div class="card__item">
                             <span>Title</span>
                             <div>
-                                <button type="button">BACK</button>
-                                <button type="button">DELETE</button>
+                                <button type="button" class="card-item__btn">BACK</button>
+                                <button type="button" class="card-item__btn">DELETE</button>
                             </div>
                         </div>
-    
-                        <div class="todo__line">
+                        <div class="card__item">
                             <span>Description</span>
                         </div>
-    
-                        <div class="todo__line">
+                        <div class="card__item">
                             <span>User</span>
-                            <div class="date"></div>
+                            <div class="date">Time</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="todoDone todoAll">
-                <div class="todoDone__header todoAll__header">
-                    DONE:<span>0</span>
+            <div class="list-done list">
+                <div class="list-done__header list__header">
+                    DONE:<span>1</span>
                 </div>
 
-                <div class="todoDone__content todoAll__content">
-                    <div class="todo">
-                        <div class="todo__line">
+                <div class="list-done__content list__content">
+                    <div class="list-done__card card">
+                        <div class="card__item">
                             <span>Title</span>
-                            <button type="button">DELETE</button>
+                            <button type="button" class="card-item__btn">DELETE</button>
                         </div>
-    
-                        <div class="todo__line">
+                        <div class="card__item">
                             <span>Description</span>
                         </div>
-    
-                        <div class="todo__line">
+                        <div class="card__item">
                             <span>User</span>
-                            <div class="date"></div>
+                            <div class="date">Time</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="todoDone__footer todoAll__footer">
-                    <button type="button" class="todoAll_btn">Delete all</button>
+                <div class="list-done__footer list__footer">
+                    <button type="button" class="list__btn">Delete all</button>
                 </div>
             </div>
         </main>
