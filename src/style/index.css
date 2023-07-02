@@ -2,7 +2,7 @@
 @import url("./nulling_style.css");
 .wrapper {
   font-family: Raleway;
-  display: block;
+  min-width: 0;
   overflow-x: hidden;
   padding: 0 1rem;
 }
@@ -35,7 +35,7 @@
   border-radius: 5px;
   background-color: white;
 }
-.wrapper .main {
+.wrapper .main .list-container {
   font-weight: 600;
   display: flex;
   align-items: flex-start;
@@ -46,38 +46,40 @@
   margin: 0 auto;
   padding: 1rem;
 }
-.wrapper .main .list {
+.wrapper .main .list-container .list {
   max-width: 300px;
   width: 100%;
   border-radius: 10px;
   background-color: rgb(200, 200, 200);
 }
-.wrapper .main .list .list__header {
+.wrapper .main .list-container .list .list__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
   padding: 1.4rem;
+  width: 100%;
 }
-.wrapper .main .list .list__header span {
+.wrapper .main .list-container .list .list__header .list__header-number {
   font-size: 1.2rem;
 }
-.wrapper .main .list .list-add__header {
+.wrapper .main .list-container .list .list-add__header {
   background-color: rgb(152, 223, 138);
   border: 1px solid rgb(106, 156, 96);
 }
-.wrapper .main .list .list-progress__header {
+.wrapper .main .list-container .list .list-progress__header {
   background-color: rgb(240, 240, 255);
   border: 1px solid rgb(189, 189, 200);
 }
-.wrapper .main .list .list-done__header {
+.wrapper .main .list-container .list .list-done__header {
   background-color: rgb(135, 206, 250);
   border: 1px solid rgb(105, 160, 195);
 }
-.wrapper .main .list .list__content {
+.wrapper .main .list-container .list .list__content {
   min-height: 340px;
+  width: 100%;
 }
-.wrapper .main .list .list__content .card {
+.wrapper .main .list-container .list .list__content .card {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
@@ -87,69 +89,73 @@
   border-radius: 15px;
   background-color: azure;
 }
-.wrapper .main .list .list__content .card .card__item {
+.wrapper .main .list-container .list .list__content .card .card__item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 1rem;
 }
-.wrapper .main .list .list__content .card .card__item .card-item__btn {
+.wrapper .main .list-container .list .list__content .card .card__item .card-item__btn {
   border: 1px solid black;
   border-radius: 5px;
   font-size: 0.8rem;
   padding: 0.2rem;
 }
-.wrapper .main .list .list__content .card .card__item .card-item__btn:active {
+.wrapper .main .list-container .list .list__content .card .card__item .card-item__btn:active {
   box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
 }
-.wrapper .main .list .list__content .card .card__item .card-item__btn-apply {
+.wrapper .main .list-container .list .list__content .card .card__item .card-item__btn-apply {
   padding: 0.8rem 0.4rem;
   font-size: 1.2rem;
 }
-.wrapper .main .list .list__content .list-add__card {
+.wrapper .main .list-container .list .list__content .list-add__card {
   background-color: rgb(152, 223, 138);
   border: 1px solid rgb(106, 156, 96);
 }
-.wrapper .main .list .list__content .list-progress__card {
+.wrapper .main .list-container .list .list__content .list-progress__card {
   background-color: rgb(240, 240, 255);
   border: 1px solid rgb(189, 189, 200);
 }
-.wrapper .main .list .list__content .list-done__card {
+.wrapper .main .list-container .list .list__content .list-done__card {
   background-color: rgb(135, 206, 250);
   border: 1px solid rgb(105, 160, 195);
 }
-.wrapper .main .list .list-progress__content {
+.wrapper .main .list-container .list .list-progress__content {
   min-height: 390px;
 }
-.wrapper .main .list .list__footer {
+.wrapper .main .list-container .list .list__footer {
+  width: 100%;
   border-radius: 10px;
 }
-.wrapper .main .list .list__footer button {
+.wrapper .main .list-container .list .list__footer button {
   font-weight: 600;
   width: 100%;
   height: 50px;
   border: 0px;
   border-radius: 10px;
 }
-.wrapper .main .list .list-add__footer button {
+.wrapper .main .list-container .list .list-add__footer button {
   background-color: rgb(152, 223, 138);
   border: 1px solid rgb(106, 156, 96);
 }
-.wrapper .main .list .list-add__footer button:hover {
+.wrapper .main .list-container .list .list-add__footer button:hover {
   background-color: rgb(134, 197, 122);
 }
-.wrapper .main .list .list-add__footer button:active {
+.wrapper .main .list-container .list .list-add__footer button:active {
   box-shadow: 0px 0px 10px 0px rgb(106, 156, 96) inset;
 }
-.wrapper .main .list .list-done__footer button {
+.wrapper .main .list-container .list .list-done__footer button {
   background-color: rgb(135, 206, 250);
   border: 1px solid rgb(105, 160, 195);
 }
-.wrapper .main .list .list-done__footer button:hover {
+.wrapper .main .list-container .list .list-done__footer button:hover {
   background-color: rgb(126, 191, 232);
 }
-.wrapper .main .list .list-done__footer button:active {
+.wrapper .main .list-container .list .list-done__footer button:active {
   box-shadow: 0px 0px 10px 0px rgb(88, 134, 163) inset;
+}
+.wrapper .main .list-container-2 {
+  display: none;
 }
 
 @media only screen and (max-width: 768px) {
@@ -157,27 +163,72 @@
     padding: 0;
   }
   .wrapper .header {
+    margin: 1.4rem auto 5.5rem;
     width: 95%;
   }
   .wrapper .header .time {
     width: calc(10% + 2rem);
   }
-  .wrapper .main {
-    flex-wrap: wrap;
-    gap: 0px;
-    row-gap: 0.3rem;
-    align-items: center;
+  .wrapper .main .list-container-1 {
+    display: none;
   }
-  .wrapper .main .list {
-    max-width: 226px;
+  .wrapper .main .list-container-2 {
+    position: relative;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 1rem;
+    max-width: 1170px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  .wrapper .main .list-container-2 .list {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .wrapper .main .list-container-2 .swiper-pagination {
+    position: absolute;
+    transform: translate(0, -695%);
+  }
+  .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
+    background-color: white;
+    width: 9.8rem;
+    height: 2.85rem;
+    font-size: 1.4rem;
+    margin: 1rem;
+    text-align: center;
   }
 }
 @media only screen and (max-width: 500px) {
-  .wrapper .main {
-    flex-direction: column;
-    align-items: center;
+  .wrapper .main .list-container-2 .swiper-pagination {
+    transform: translate(0, -670%);
   }
-  .wrapper .main .list {
-    width: 100%;
+  .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
+    width: 6.6rem;
+    height: 3rem;
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 363px) {
+  .wrapper .main .list-container-2 .swiper-pagination {
+    transform: translate(0, -625%);
+  }
+  .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
+    width: 4.6rem;
+    margin: 0.7rem;
+  }
+}
+@media only screen and (max-width: 253px) {
+  .wrapper .main .list-container-2 .swiper-pagination {
+    transform: translate(0, -855%);
+  }
+  .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
+    margin: 0;
   }
 }
