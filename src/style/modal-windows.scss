@@ -14,9 +14,10 @@ $text-background: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
-%m-position {
+%modal-position {
     position: fixed;
     left: 50%;  top: 50%;
     transform: translate(-50%, -50%);
@@ -26,7 +27,7 @@ $text-background: white;
     border: 1px solid black;
 }
 
-%m-border {
+%modal-border {
     border: 1px solid gray;
 }
 
@@ -35,11 +36,12 @@ $text-background: white;
     border-radius: 30px;
     background-color: $modal-color;
     padding: 35px 45px 20px 45px;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
-    @extend %m-border;
-    // @extend %m-position;
+    @extend %modal-border;
+    @extend %modal-position;
+    z-index: 2;
 
     @media (max-width: 560px) {
         width: 95%;
@@ -54,13 +56,12 @@ $text-background: white;
         @extend %text-border;
         @extend %display-flex-center;
     }
-    input {
+    .description__text {
         width: 100%;
         height: 15vh;
         margin-top: 20px;
         background-color: $text-background;
         border-radius: 20px;
-        text-align: center;
         @extend %text-border;
         @extend %display-flex-center;
     }
@@ -151,13 +152,14 @@ $text-background: white;
     flex-direction: column;
     justify-content: space-around;
     @extend %display-flex-center;
-    @extend %m-border;
-    @extend %m-position;
+    @extend %modal-border;
+    @extend %modal-position;
+    display: none;
+    z-index: 2;
 
     @media (max-width: 400px) {
         width: 95%;
     }
-
 
     .warning__buttons {
         display: flex;
@@ -181,4 +183,15 @@ $text-background: white;
             }
         }            
     }
+}
+
+.backdrop {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }

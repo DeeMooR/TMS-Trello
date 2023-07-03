@@ -5,9 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="./style/index.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="./style/modal-windows.css">
+    <title>Trello</title>
 </head>
 <body>
+    <div class="window-description description">
+        <input name="textfield" type="text" class="description__title" placeholder="Title"></input>
+        <input name="textfield" type="text" class="description__text" placeholder="Description">
+        <div class="description__footer">
+            <div class="description__selector">
+                <select name="description__users">
+                    <option value="">Select user</option>
+                    <option value="1">User 1</option>
+                    <option value="2">User 2</option>
+                    <option value="3">User 3</option>
+                    <option value="4">User 4</option>
+                    <option value="5">User 5</option>
+                </select>    
+            </div>
+            <div class="description__buttons">
+                <button class="description-cancel-btn">Cancel</button>
+                <button class="description-confirm-btn">Confirm</button>
+            </div>   
+        </div>
+    </div>
+
+    <div class="window-warning warning">
+        <span class="warning__text">Вы уверены, что хотите удалить все карточки?</span>
+        <div class="warning__buttons">
+            <button class="warning-cancel-btn">Cancel</button>
+            <button class="warning-confirm-btn">Confirm</button>
+        </div>
+    </div>
+
+    <div class="backdrop"></div>
+
     <div class="wrapper">
         <header class="header">
             <div class="logo-trello">Trello</div>
@@ -57,7 +89,7 @@
                         </div>
                     </div>
                     <div class="list-add__footer list__footer">
-                        <button type="button" class="list__btn">Add todo</button>
+                        <button type="button" class="list__btn add-btn">Add todo</button>
                     </div>
                 </div>
 
@@ -105,7 +137,7 @@
                         </div>
                     </div>
                     <div class="list-done__footer list__footer">
-                        <button type="button" class="list__btn">Delete all</button>
+                        <button type="button" class="list__btn delete-all-btn">Delete all</button>
                     </div>
                 </div>
             </div>
