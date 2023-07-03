@@ -3,12 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="./style/index.css">
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="wrapper">
+        <header class="header">
+            <div class="logo-trello">Trello</div>
+            <div class="time" id="" >12:34</div>
+        </header>
 
+        <main class="main">
+            <div class="list-container list-container-1">
+                <div class="list-add list">
+                    <div class="list-add__header list__header">
+                        TODO:<span class="list-add__header-number list__header-number">2</span>
+                    </div>
+                    <div class="list-add__content list__content">
+                        <div class="list-add__card card">
+                            <div class="card__item">
+                                <span>Title</span>
+                                <div>
+                                    <button type="button" class="card-item__btn">EDIT</button>
+                                    <button type="button" class="card-item__btn">DELETE</button>
+                                </div>
+                            </div>
+                            <div class="card__item">
+                                <span>Description</span>
+                                <button type="button" class="card-item__btn card-item__btn-apply">></button>
+                            </div>
+                            <div class="card__item">
+                                <span>User</span>
+                                <div class="date">Time</div>
+                            </div>
+                        </div>
+                        <div class="list-add__card card">
+                            <div class="card__item">
+                                <span>Title</span>
+                                <div>
+                                    <button type="button" class="card-item__btn">EDIT</button>
+                                    <button type="button" class="card-item__btn">DELETE</button>
+                                </div>
+                            </div>
+                            <div class="card__item">
+                                <span>Description</span>
+                                <button type="button" class="card-item__btn card-item__btn-apply">></button>
+                            </div>
+                            <div class="card__item">
+                                <span>User</span>
+                                <div class="date">Time</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-add__footer list__footer">
+                        <button type="button" class="list__btn">Add todo</button>
+                    </div>
+                </div>
+
+                <div class="list-progress list">
+                    <div class="list-progress__header list__header">
+                        IN PROGRESS:<span class="list-progress__header-number list__header-number">1</span>
+                    </div>
+                    <div class="list-progress__content list__content">
+                        <div class="list-progress__card card">
+                            <div class="card__item">
+                                <span>Title</span>
+                                <div>
+                                    <button type="button" class="card-item__btn">BACK</button>
+                                    <button type="button" class="card-item__btn">COMPLETE</button>
+                                </div>
+                            </div>
+                            <div class="card__item">
+                                <span>Description</span>
+                            </div>
+                            <div class="card__item">
+                                <span>User</span>
+                                <div class="date">Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-done list">
+                    <div class="list-done__header list__header">
+                        DONE:<span class="list-done__header-number list__header-number">1</span>
+                    </div>
+                    <div class="list-done__content list__content">
+                        <div class="list-done__card card">
+                            <div class="card__item">
+                                <span>Title</span>
+                                <button type="button" class="card-item__btn">DELETE</button>
+                            </div>
+                            <div class="card__item">
+                                <span>Description</span>
+                            </div>
+                            <div class="card__item">
+                                <span>User</span>
+                                <div class="date">Time</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-done__footer list__footer">
+                        <button type="button" class="list__btn">Delete all</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swiper-container list-container list-container-2"><!--слайдер при >768px-->
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="list-add list">
+                            <div class="list-add__header list__header">
+                                TODO:<span class="list-add__header-number list__header-number">2</span>
+                            </div>
+                            <div class="list-add__content list__content">
+                                <div class="list-add__card card">
+                                    <div class="card__item">
+                                        <span>Title</span>
+                                        <div>
+                                            <button type="button" class="card-item__btn">EDIT</button>
+                                            <button type="button" class="card-item__btn">DELETE</button>
+                                        </div>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>Description</span>
+                                        <button type="button" class="card-item__btn card-item__btn-apply">></button>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>User</span>
+                                        <div class="date">Time</div>
+                                    </div>
+                                </div>
+                                <div class="list-add__card card">
+                                    <div class="card__item">
+                                        <span>Title</span>
+                                        <div>
+                                            <button type="button" class="card-item__btn">EDIT</button>
+                                            <button type="button" class="card-item__btn">DELETE</button>
+                                        </div>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>Description</span>
+                                        <button type="button" class="card-item__btn card-item__btn-apply">></button>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>User</span>
+                                        <div class="date">Time</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-add__footer list__footer">
+                                <button type="button" class="list__btn">Add todo</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="list-progress list swiper-slide">
+                            <div class="list-progress__header list__header">
+                                IN PROGRESS:<span class="list-progress__header-number list__header-number">1</span>
+                            </div>
+                            <div class="list-progress__content list__content">
+                                <div class="list-progress__card card">
+                                    <div class="card__item">
+                                        <span>Title</span>
+                                        <div>
+                                            <button type="button" class="card-item__btn">BACK</button>
+                                            <button type="button" class="card-item__btn">COMPLETE</button>
+                                        </div>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>Description</span>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>User</span>
+                                        <div class="date">Time</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="list-done list swiper-slide">
+                            <div class="list-done__header list__header">
+                                DONE:<span class="list-done__header-number list__header-number">1</span>
+                            </div>
+                            <div class="list-done__content list__content">
+                                <div class="list-done__card card">
+                                    <div class="card__item">
+                                        <span>Title</span>
+                                        <button type="button" class="card-item__btn">DELETE</button>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>Description</span>
+                                    </div>
+                                    <div class="card__item">
+                                        <span>User</span>
+                                        <div class="date">Time</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-done__footer list__footer">
+                                <button type="button" class="list__btn">Delete all</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>
