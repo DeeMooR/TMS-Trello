@@ -20,5 +20,8 @@
   "homepage": "https://github.com/DeeMooR/TMS-Trello#readme",
   "devDependencies": {
     "parcel": "^2.9.3"
+  },
+  "dependencies": {
+    "swiper": "^9.4.1"
   }
 }
