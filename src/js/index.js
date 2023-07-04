@@ -26,6 +26,9 @@ function getTimeForClock() {
     if (hh < 10) {
         hh = '0' + hh;
     }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
     let timeClock = hh + ':' + mm;
     clock.innerHTML = timeClock;
     setTimeout(getTimeForClock, 1000);
