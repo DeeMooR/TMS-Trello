@@ -1,1 +1,286 @@
 @import url('./fonts.css');
+@import url('./nulling_style.css');
+
+$list-add-background-color: rgb(152, 223, 138);
+$list-add-border-color: 1px solid rgb(106, 156, 96);
+$list-add-background-color-hover: rgb(134, 197, 122);
+$list-add-background-color-active: 0px 0px 10px 0px rgb(106, 156, 96) inset;
+$list-progress-background-color: rgb(240, 240, 255);
+$list-progress-border-color: 1px solid rgb(189, 189, 200);
+$list-done-background-color: rgb(135, 206, 250);
+$list-done-border-color: 1px solid rgb(105, 160, 195);
+$list-done-background-color-hover: rgb(126, 191, 232);
+$list-done-background-color-active: 0px 0px 10px 0px rgb(88, 134, 163) inset;
+$card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
+
+.wrapper {
+    font-family: Raleway;
+    min-width: 0;
+    overflow-x: hidden;
+    padding: 0 1rem;
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1170px;
+        width: 100%;
+        height: 150px;
+        margin: 1.4rem auto;
+        border-radius: 2.1rem;
+        background-color: rgb(216, 184, 246);
+        border: 1px solid rgb(189, 121, 253);
+        div {
+            margin: 1.4rem;
+        }
+        .logo-trello {
+            font-size: 2.5rem;
+        }
+        .clock {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            width: 10%;
+            height: 40px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            background-color: white;
+        }
+    }
+    .main {
+        .list-container {
+            font-weight: 600;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            gap: 1rem;
+            max-width: 1170px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+            .list {
+                max-width: 300px;
+                width: 100%;
+                border-radius: 10px;
+                background-color: rgb(200,200, 200);
+                .list__header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-radius: 10px;
+                    padding: 1.4rem;
+                    width: 100%;
+                    .list__header-number {
+                        font-size: 1.2rem;
+                    }
+                }
+                .list-add__header {
+                    background-color: $list-add-background-color;
+                    border: $list-add-border-color;
+                }
+                .list-progress__header {
+                    background-color: $list-progress-background-color;
+                    border: $list-progress-border-color;
+                }
+                .list-done__header {
+                    background-color: $list-done-background-color;
+                    border: $list-done-border-color;    
+                }
+                .list__content {
+                    min-height: 340px;
+                    width: 100%;
+                    .card {
+                        display: flex;
+                        justify-content: space-around;
+                        flex-direction: column;
+                        max-width: 90%;
+                        min-height: 150px;
+                        margin: 1.4rem auto;
+                        border-radius: 15px;
+                        background-color: azure;
+                        .card__item {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin: 0 1rem;
+                            .card-item__btn {
+                                border: 1px solid black;
+                                border-radius: 5px;
+                                font-size: 0.8rem;
+                                padding: 0.2rem ;
+                            }
+                            .card-item__btn:active {
+                                box-shadow: $card-item-btn-box-shadow;
+                            }
+                            .card-item__btn-apply {
+                                padding: 0.8rem 0.4rem;
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+                    .list-add__card {
+                        background-color: $list-add-background-color;
+                        border: $list-add-border-color;
+                    }
+                    .list-progress__card {
+                        background-color: $list-progress-background-color;
+                        border: $list-progress-border-color;    
+                    }
+                    .list-done__card {
+                        background-color: $list-done-background-color;
+                        border: $list-done-border-color;    
+                    }
+                }
+                .list-progress__content {
+                    min-height: 390px;
+                }
+                .list__footer {
+                    width: 100%;
+                    border-radius: 10px;
+                    button {
+                        font-weight: 600;
+                        width: 100%;
+                        height: 50px;
+                        border: 0px; 
+                        border-radius: 10px;
+                    }
+                }
+                .list-add__footer {
+                    button {
+                        background-color: $list-add-background-color;
+                        border: $list-add-border-color;
+                    }
+                    button:hover{
+                        background-color: $list-add-background-color-hover;
+                    }
+                    button:active {
+                        box-shadow: $list-add-background-color-active; 
+                    }
+                }
+                .list-done__footer {
+                    button {
+                        background-color: $list-done-background-color;
+                        border: $list-done-border-color;    
+                    }
+                    button:hover{
+                        background-color: $list-done-background-color-hover;
+                    }
+                    button:active {
+                        box-shadow: $list-done-background-color-active;
+                    }
+                }
+            }
+        }
+        .list-container-2 {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        padding: 0;
+        .header {
+            margin: 1.4rem auto 5.5rem;
+            width: 95%;
+            .clock {
+                width: calc(10% + 2.5rem);
+            }
+        }
+        .main {
+            .list-container-1 {
+                display: none;
+            }
+            .list-container-2 {
+                position: relative;
+                font-weight: 600;
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-around;
+                gap: 1rem;
+                max-width: 1170px;
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+                padding: 1rem;
+                .list {
+                    max-width: 60%;
+                    margin: 0 auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                }
+                .swiper-pagination {
+                    position: absolute;
+                    transform: translate(0, -695%);
+                    .swiper-pagination-bullet {
+                        background-color: white;
+                        width: 9.8rem;
+                        height: 2.85rem;
+                        font-size: 1.4rem;
+                        margin: 1rem;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .wrapper {
+        .main {
+            .list-container-2 {
+                .list {
+                    max-width: 70%;
+                }
+                .swiper-pagination {
+                    transform: translate(0, -670%);
+                    .swiper-pagination-bullet {
+                        width: 6.6rem;
+                        height: 3rem;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 363px) {
+    .wrapper {
+        .main {
+            .list-container-2 {
+                .list {
+                    max-width: 83%;
+                }
+                .swiper-pagination {
+                    transform: translate(0, -625%);
+                    .swiper-pagination-bullet {
+                        width: 4.6rem;
+                        margin: 0.7rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 253px) {
+    .wrapper {
+        .main {
+            .list-container-2 {
+                .list {
+                    max-width: 90%;
+                }
+                .swiper-pagination {
+                    transform: translate(0, -855%);
+                    .swiper-pagination-bullet {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
