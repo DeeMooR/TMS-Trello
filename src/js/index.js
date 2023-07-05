@@ -1,5 +1,56 @@
 'use strict'
 
+if (document.documentElement.clientWidth < 768) {   
+    let listContainer = document.querySelector('.list-container')
+    let dListAdd = document.querySelector('.list-add')
+    let dListProgress = document.querySelector('.list-progress')
+    let dListDone = document.querySelector('.list-done')
+
+    listContainer.setAttribute('class', 'swiper-container list-container list-container-2');
+
+    let htmlListAdd = dListAdd.outerHTML;
+    let htmlListProgress = dListProgress.outerHTML;
+    let htmlListDone = dListDone.outerHTML;
+
+    listContainer.innerHTML = '';
+
+    let swiperWrapper = document.createElement('div');
+    swiperWrapper.classList = "swiper-wrapper";
+    listContainer.append(swiperWrapper);
+
+    let swiperPagination = document.createElement('div');
+    swiperPagination.classList = "swiper-pagination";
+    listContainer.append(swiperPagination);
+
+    let swiperSlideAdd = document.createElement('div');
+    swiperSlideAdd.classList = "swiper-slide";
+    swiperSlideAdd.innerHTML = htmlListAdd;
+    swiperWrapper.append(swiperSlideAdd);
+
+    let swiperSlideProgress = document.createElement('div');
+    swiperSlideProgress.classList = "swiper-slide";
+    swiperSlideProgress.innerHTML = htmlListProgress;
+    swiperWrapper.append(swiperSlideProgress);
+
+    let swiperSlideDone = document.createElement('div');
+    swiperSlideDone.classList = "swiper-slide";
+    swiperSlideDone.innerHTML = htmlListDone;
+    swiperWrapper.append(swiperSlideDone);
+
+    new Swiper('.swiper-container', {
+        slidesPerView: 1, //кол-во слайдов на странице
+        initialSlide: 0,// какой слайд показан
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function (index, className) {
+                let wordList = ['TODO', 'IN PROGRESS', 'DONE'];
+                return '<span class="' + className + '">' + wordList[index] + '</span>';
+            },
+        },
+    });    
+}
+
 let cardInProgress = [], todos = []
 
 // создание новой карточки
@@ -74,7 +125,6 @@ function createCard() {
 
             todo.status = 'In progress'
             setName()
-            console.log(todos);
 
             if (cardInProgress.length <= 6) {
                 card.style.backgroundColor = 'rgb(240, 240, 255)'
@@ -92,6 +142,8 @@ function createCard() {
         }
         if (target == deleteBtn) {
             card.remove()
+            todos.splice(todos.indexOf(todo), 1)
+            setName()
         }
         if (target == backBtn) {
             card.style.backgroundColor = 'rgb(152, 223, 138)'
@@ -101,9 +153,8 @@ function createCard() {
             comleteBtn.remove()
             listContent.append(card)
 
-            todo.status = 'Todo'
+            todo.status = 'Task'
             setName()
-            console.log(todos);
         }
         if (target == comleteBtn) {
             card.style.backgroundColor = 'rgb(135, 206, 250)'            
@@ -114,7 +165,6 @@ function createCard() {
 
             todo.status = 'Done'
             setName()
-            console.log(todos);
         }
     })
 
@@ -132,23 +182,117 @@ function createCard() {
     todo.text = spanDescription.innerHTML
     todo.user = spanUser.innerHTML
     todo.time = divDate.innerHTML
+    todo.status = 'Task'
 
-    todo.status = 'Todo'
     todos.push(todo)
     setName()
 
-    console.log(todos);
+    // function setName() {
+    //     let todoName = ''
+    //     for (let i = 0; i < todos.length; i++) {            
+    //         todoName = `todo ${i}`
+    //     }
+    //     localStorage.setItem(todoName, JSON.stringify(todo))
+    // }
+}
 
-    function setName() {
-        let todoName = ''
-        for (let i = 0; i < todos.length; i++) {            
-            todoName = `todo ${i}`
+function setName() {
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+function getName() {
+    let array = JSON.parse(localStorage.getItem('todos'))
+
+    for (let i = 0; i < array.length; i++) {
+        let cardNew = document.createElement('div')
+        cardNew.classList.add('list-add__card', 'card')
+        cardNew[i]
+    
+        let cardItemTitle = document.createElement('div')
+        cardItemTitle.setAttribute('class', 'card__item')
+    
+        let cardItemDescription = document.createElement('div')
+        cardItemDescription.setAttribute('class', 'card__item')
+    
+        let cardItemUser = document.createElement('div')
+        cardItemUser.setAttribute('class', 'card__item')
+    
+        let spanTitle = document.createElement('span')
+        spanTitle.innerHTML = array[i].title
+    
+        let divButtons = document.createElement('div')
+    
+        let editBtn = document.createElement('button')
+        editBtn.setAttribute('type', 'button')
+        editBtn.classList.add('card-item__btn', 'edit-btn')
+        editBtn.innerHTML = 'EDIT'
+    
+        let deleteBtn = document.createElement('button')
+        deleteBtn.classList.add('card-item__btn', 'delete-btn')
+        deleteBtn.innerHTML = 'DELETE'
+    
+        let spanDescription = document.createElement('span')
+        spanDescription.innerHTML = array[i].text
+    
+        let applyBtn = document.createElement('button')
+        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
+        applyBtn.innerHTML = '>'
+    
+        let spanUser = document.createElement('span')
+        spanUser.innerHTML = array[i].user
+    
+        let divDate = document.createElement('div')
+        divDate.setAttribute('class', 'date')
+        divDate.innerHTML = array[i].time
+    
+        let backBtn = document.createElement('button')
+        backBtn.classList.add('card-item__btn', 'back-btn')
+        backBtn.innerHTML = 'BACK'
+            
+        let comleteBtn = document.createElement('button')
+        comleteBtn.classList.add('card-item__btn', 'comlete-btn')
+        comleteBtn.innerHTML = 'COMPLETE'
+    
+        divButtons.append(editBtn, deleteBtn)
+        cardItemTitle.append(spanTitle, divButtons)
+        cardItemDescription.append(spanDescription, applyBtn)
+        cardItemUser.append(spanUser, divDate)
+    
+        cardNew.append(cardItemTitle, cardItemDescription, cardItemUser)
+
+        if (array[i].status === 'Task') listContent.append(cardNew)
+        if (array[i].status === 'In progress') {
+            cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
+            applyBtn.remove()
+            editBtn.remove()
+            deleteBtn.remove()
+            divButtons.append(backBtn, comleteBtn)
+            listProgress.append(cardNew)
         }
-        localStorage.setItem(todoName, JSON.stringify(todo))
+        if (array[i].status === 'Done') {
+            cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
+            backBtn.remove()
+            comleteBtn.remove()
+            editBtn.remove()
+            applyBtn.remove()
+            divButtons.append(deleteBtn)
+            listDoneContent.append(cardNew)
+        }
+    
+        const todoNew = {}
+
+        // todoNew.id = array[i].id
+        todoNew.title = array[i].title
+        todoNew.text = array[i].text
+        todoNew.user = array[i].user
+        todoNew.time = array[i].time
+        todoNew.status = array[i].status
+
+        todos.push(todoNew)    
     }
 }
 
-//карточка "Todo"
+//карточка "Task"
 let listAddContent = document.querySelector('.list-add')
 let listContent = document.querySelector('.list-add__content')
 let addContentBtn = document.querySelector('.add-btn')
@@ -194,12 +338,16 @@ document.addEventListener('click', ({target}) => {
         backdropOn()
         descriptionTitle.value = '123'
         descriptionText.value = '123'
+
+        console.log('asd');
     }
     // удаление выполненных карточек
     if (target == deleteAllBtn) {
         warningText.innerHTML = 'Вы уверены, что хотите удалить все карточки?'
         windowWarning.style.display = 'flex'
         backdropOn()
+
+        console.log('asd');
     }
 })
 
@@ -252,33 +400,5 @@ function getTimeForClock() {
 
 getTimeForClock();
 
-let a = document.getElementById('1')
-let b = document.getElementById('2')
-let c1 = document.getElementById('3')
-let c2 = document.getElementById('4')
-let c3 = document.getElementById('5')
-let d = document.getElementById('6')
 
-if (document.documentElement.clientWidth < 768) {    
-    a.classList.add('swiper-container', 'list-container-2')
-    a.classList.remove('list-container-1')
-    b.classList.add('swiper-wrapper')
-    c1.classList.add('swiper-slide')
-    c2.classList.add('swiper-slide')
-    c3.classList.add('swiper-slide')
-    d.classList.add('swiper-pagination')
-
-    new Swiper('.swiper-container', {
-        slidesPerView: 1, //кол-во слайдов на странице
-        initialSlide: 0,// какой слайд показан
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function (index, className) {
-                let wordList = ['TODO', 'IN PROGRESS', 'DONE'];
-                return '<span class="' + className + '">' + wordList[index] + '</span>';
-            },
-        },
-    });    
-}
-
+if (localStorage.getItem('todos')) getName()
