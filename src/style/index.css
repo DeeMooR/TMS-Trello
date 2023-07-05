@@ -98,14 +98,15 @@
 .wrapper .main .list-container .list .list__content .card .card__item .card-item__btn {
   border: 1px solid black;
   border-radius: 5px;
-  font-size: 0.8rem;
-  padding: 0.2rem;
+  font-size: 0.9rem;
+  padding: 0.3rem;
+  margin-left: 0.4rem;
 }
 .wrapper .main .list-container .list .list__content .card .card__item .card-item__btn:active {
   box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
 }
 .wrapper .main .list-container .list .list__content .card .card__item .card-item__btn-apply {
-  padding: 0.8rem 0.4rem;
+  padding: 0.8rem 0.6rem;
   font-size: 1.2rem;
 }
 .wrapper .main .list-container .list .list__content .list-add__card {
@@ -173,7 +174,6 @@
     display: none;
   }
   .wrapper .main .list-container-2 {
-    position: relative;
     font-weight: 600;
     display: flex;
     align-items: flex-start;
@@ -195,7 +195,7 @@
   }
   .wrapper .main .list-container-2 .swiper-pagination {
     position: absolute;
-    transform: translate(0, -695%);
+    bottom: calc(100% - 250px);
   }
   .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
     background-color: white;
@@ -211,7 +211,8 @@
     max-width: 70%;
   }
   .wrapper .main .list-container-2 .swiper-pagination {
-    transform: translate(0, -670%);
+    position: absolute;
+    bottom: calc(100% - 250px);
   }
   .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
     width: 6.6rem;
@@ -224,7 +225,8 @@
     max-width: 83%;
   }
   .wrapper .main .list-container-2 .swiper-pagination {
-    transform: translate(0, -625%);
+    position: absolute;
+    bottom: calc(100% - 250px);
   }
   .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
     width: 4.6rem;
@@ -236,7 +238,8 @@
     max-width: 90%;
   }
   .wrapper .main .list-container-2 .swiper-pagination {
-    transform: translate(0, -855%);
+    position: absolute;
+    bottom: calc(100% - 250px);
   }
   .wrapper .main .list-container-2 .swiper-pagination .swiper-pagination-bullet {
     margin: 0;
