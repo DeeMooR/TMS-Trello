@@ -36,3 +36,29 @@ function getTimeForClock() {
 
 getTimeForClock();
 
+function getUserName () {
+    fetch(`https://jsonplaceholder.typicode.com/users`)
+    .then(responce => responce.json())
+    .then(users => {
+        let userName = []
+        for(let i in users) {
+            userName.push(users[i].name)
+        }
+        console.log(userName);
+    })
+}
+
+getUserName()
+
+
+
+
+   
+
+
+    
+
+
+
+
+
