@@ -106,14 +106,15 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                             .card-item__btn {
                                 border: 1px solid black;
                                 border-radius: 5px;
-                                font-size: 0.8rem;
-                                padding: 0.2rem ;
+                                font-size: 0.9rem;
+                                padding: 0.3rem;
+                                margin-left: 0.4rem;
                             }
                             .card-item__btn:active {
                                 box-shadow: $card-item-btn-box-shadow;
                             }
                             .card-item__btn-apply {
-                                padding: 0.8rem 0.4rem;
+                                padding: 0.8rem 0.6rem;
                                 font-size: 1.2rem;
                             }
                         }
@@ -192,7 +193,6 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                 display: none;
             }
             .list-container-2 {
-                position: relative;
                 font-weight: 600;
                 display: flex;
                 align-items: flex-start;
@@ -213,7 +213,7 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                 }
                 .swiper-pagination {
                     position: absolute;
-                    transform: translate(0, -695%);
+                    bottom: calc(100% - 250px);
                     .swiper-pagination-bullet {
                         background-color: white;
                         width: 9.8rem;
@@ -236,7 +236,8 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                     max-width: 70%;
                 }
                 .swiper-pagination {
-                    transform: translate(0, -670%);
+                    position: absolute;
+                    bottom: calc(100% - 250px);
                     .swiper-pagination-bullet {
                         width: 6.6rem;
                         height: 3rem;
@@ -256,7 +257,8 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                     max-width: 83%;
                 }
                 .swiper-pagination {
-                    transform: translate(0, -625%);
+                    position: absolute;
+                    bottom: calc(100% - 250px);
                     .swiper-pagination-bullet {
                         width: 4.6rem;
                         margin: 0.7rem;
@@ -275,7 +277,8 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                     max-width: 90%;
                 }
                 .swiper-pagination {
-                    transform: translate(0, -855%);
+                    position: absolute;
+                    bottom: calc(100% - 250px);
                     .swiper-pagination-bullet {
                         margin: 0;
                     }
