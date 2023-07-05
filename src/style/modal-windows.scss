@@ -41,7 +41,7 @@ $text-background: white;
     justify-content: space-between;
     @extend %modal-border;
     @extend %modal-position;
-    z-index: 2;
+    z-index: 12;
 
     @media (max-width: 560px) {
         width: 95%;
@@ -155,7 +155,7 @@ $text-background: white;
     @extend %modal-border;
     @extend %modal-position;
     display: none;
-    z-index: 2;
+    z-index: 12;
 
     @media (max-width: 400px) {
         width: 95%;
@@ -187,6 +187,7 @@ $text-background: white;
 
 .backdrop {
     position: fixed;
+    z-index: 11;
     left: -100%;
     top: 0;
     width: 100%;

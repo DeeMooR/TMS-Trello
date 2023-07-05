@@ -1,19 +1,6 @@
 'use strict'
 
-new Swiper('.swiper-container', {
-    slidesPerView: 1, //кол-во слайдов на странице
-    initialSlide: 0,// какой слайд показан
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        renderBullet: function (index, className) {
-            let wordList = ['TODO', 'IN PROGRESS', 'DONE'];
-            return '<span class="' + className + '">' + wordList[index] + '</span>';
-        },
-    },
-});
-
-let arrayCard = []
+let cardInProgress = [], todos = []
 
 // создание новой карточки
 function createCard() {   
@@ -55,7 +42,7 @@ function createCard() {
 
     let divDate = document.createElement('div')
     divDate.setAttribute('class', 'date')
-    divDate.innerHTML = document.querySelector('.time').innerHTML
+    divDate.innerHTML = document.querySelector('.clock').innerHTML
 
     divButtons.append(editBtn, deleteBtn)
     cardItemTitle.append(spanTitle, divButtons)
@@ -83,9 +70,13 @@ function createCard() {
         }
         
         if (target == applyBtn) {
-            arrayCard.push(descriptionTitle.value)
+            cardInProgress.push(descriptionTitle.value)
 
-            if (arrayCard.length <= 6) {
+            todo.status = 'In progress'
+            setName()
+            console.log(todos);
+
+            if (cardInProgress.length <= 6) {
                 card.style.backgroundColor = 'rgb(240, 240, 255)'
                 applyBtn.remove()
                 editBtn.remove()
@@ -109,6 +100,10 @@ function createCard() {
             backBtn.remove()
             comleteBtn.remove()
             listContent.append(card)
+
+            todo.status = 'Todo'
+            setName()
+            console.log(todos);
         }
         if (target == comleteBtn) {
             card.style.backgroundColor = 'rgb(135, 206, 250)'            
@@ -116,6 +111,10 @@ function createCard() {
             comleteBtn.remove()
             divButtons.append(deleteBtn)
             listDoneContent.append(card)
+
+            todo.status = 'Done'
+            setName()
+            console.log(todos);
         }
     })
 
@@ -126,6 +125,27 @@ function createCard() {
     let comleteBtn = document.createElement('button')
     comleteBtn.classList.add('card-item__btn', 'comlete-btn')
     comleteBtn.innerHTML = 'COMPLETE'
+
+    const todo = {}
+    // todo.id = 
+    todo.title = spanTitle.innerHTML
+    todo.text = spanDescription.innerHTML
+    todo.user = spanUser.innerHTML
+    todo.time = divDate.innerHTML
+
+    todo.status = 'Todo'
+    todos.push(todo)
+    setName()
+
+    console.log(todos);
+
+    function setName() {
+        let todoName = ''
+        for (let i = 0; i < todos.length; i++) {            
+            todoName = `todo ${i}`
+        }
+        localStorage.setItem(todoName, JSON.stringify(todo))
+    }
 }
 
 //карточка "Todo"
@@ -179,7 +199,7 @@ document.addEventListener('click', ({target}) => {
     if (target == deleteAllBtn) {
         warningText.innerHTML = 'Вы уверены, что хотите удалить все карточки?'
         windowWarning.style.display = 'flex'
-        backdropOn() 
+        backdropOn()
     }
 })
 
@@ -231,3 +251,34 @@ function getTimeForClock() {
 }
 
 getTimeForClock();
+
+let a = document.getElementById('1')
+let b = document.getElementById('2')
+let c1 = document.getElementById('3')
+let c2 = document.getElementById('4')
+let c3 = document.getElementById('5')
+let d = document.getElementById('6')
+
+if (document.documentElement.clientWidth < 768) {    
+    a.classList.add('swiper-container', 'list-container-2')
+    a.classList.remove('list-container-1')
+    b.classList.add('swiper-wrapper')
+    c1.classList.add('swiper-slide')
+    c2.classList.add('swiper-slide')
+    c3.classList.add('swiper-slide')
+    d.classList.add('swiper-pagination')
+
+    new Swiper('.swiper-container', {
+        slidesPerView: 1, //кол-во слайдов на странице
+        initialSlide: 0,// какой слайд показан
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function (index, className) {
+                let wordList = ['TODO', 'IN PROGRESS', 'DONE'];
+                return '<span class="' + className + '">' + wordList[index] + '</span>';
+            },
+        },
+    });    
+}
+

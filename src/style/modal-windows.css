@@ -37,7 +37,7 @@
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 12;
 }
 @media (max-width: 560px) {
   .window-description {
@@ -144,7 +144,7 @@
   flex-direction: column;
   justify-content: space-around;
   display: none;
-  z-index: 2;
+  z-index: 12;
 }
 @media (max-width: 400px) {
   .window-warning {
@@ -170,8 +170,10 @@
   background-color: gray;
   color: white;
 }
+
 .backdrop {
   position: fixed;
+  z-index: 11;
   left: -100%;
   top: 0;
   width: 100%;
