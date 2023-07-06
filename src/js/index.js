@@ -400,18 +400,16 @@ function getTimeForClock() {
 
 getTimeForClock();
 
-function getUserName () {
-    fetch(`https://jsonplaceholder.typicode.com/users`)
-    .then(responce => responce.json())
-    .then(users => {
-        let userName = []
-        for(let i in users) {
-            userName.push(users[i].name)
-        }
-        console.log(userName);
-    })
+let userName = [];
+async function getUserName () {
+    const responce = await fetch(`https://jsonplaceholder.typicode.com/users`);
+    const users = await responce.json();
+    for(let i = 0; i < 5; i++) {
+        userName.push(users[i].name.split(' ')[0]);
+    }
+    console.log(userName);
 }
-
-getUserName()
+await getUserName();
+console.log(userName);
 
 if (localStorage.getItem('todos')) getName()
