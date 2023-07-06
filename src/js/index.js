@@ -358,7 +358,7 @@ document.addEventListener('click', ({target}) => {
         backdropOff()
         flag = true
     }
-    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '') {
+    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== 'Select user') {
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
@@ -411,5 +411,12 @@ async function getUserName () {
 }
 await getUserName();
 console.log(userName);
+
+for (let i = 0; i < userName.length; i++) {//добваление имен из масива userName в select
+    let newOption = document.createElement('option');
+    newOption.classList.add(`user__${[i]}`)
+    newOption.innerHTML = userName[i];
+    user.appendChild(newOption)
+}
 
 if (localStorage.getItem('todos')) getName()
