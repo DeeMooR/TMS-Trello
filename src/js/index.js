@@ -145,21 +145,27 @@ function createCard() {
         }
 
         if (target == confirmDescriptionBtn) {
-            // применяется ко всем сразу ??
-            spanTitle.innerHTML = descriptionTitle.value
-            spanDescription.innerHTML = descriptionText.value
+            // так применяется ко всем сразу            
+                // spanTitle.innerHTML = descriptionTitle.value
+                // spanDescription.innerHTML = descriptionText.value
+
+            // а так не работае кнопка edit
+                card.spanTitle = descriptionTitle.value
+                card.spanDescription = descriptionText.value
+
             flag = true
         }
         
         if (target == applyBtn) {
-            listAddCounter.innerHTML = --listAddCounter.innerHTML;
-            listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
-            cardInProgress.push(descriptionTitle.value)
-
-            todo.status = 'In progress'
-            setName()
-
-            if (cardInProgress.length <= 6) {
+            if (cardInProgress.length < 6) {
+                listAddCounter.innerHTML = --listAddCounter.innerHTML;
+                listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
+                cardInProgress.push(descriptionTitle.value)
+              
+                todo.status = 'In progress'
+                setName()   
+                cardInProgress.push(1)
+              
                 card.style.backgroundColor = 'rgb(240, 240, 255)'
                 applyBtn.remove()
                 editBtn.remove()
@@ -185,6 +191,7 @@ function createCard() {
             setName()
         }
         if (target == backBtn) {
+            cardInProgress.pop()
             listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
             listAddCounter.innerHTML = ++listAddCounter.innerHTML;
             card.style.backgroundColor = 'rgb(152, 223, 138)'
@@ -198,6 +205,7 @@ function createCard() {
             setName()
         }
         if (target == comleteBtn) {
+            cardInProgress.pop()
             listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
             listDoneCounter.innerHTML = ++listDoneCounter.innerHTML;
             card.style.backgroundColor = 'rgb(135, 206, 250)'            
@@ -393,16 +401,12 @@ document.addEventListener('click', ({target}) => {
         backdropOn()
         descriptionTitle.value = '123'
         descriptionText.value = '123'
-
-        console.log('asd');
     }
     // удаление выполненных карточек
     if (target == deleteAllBtn) {
         warningText.innerHTML = 'Вы уверены, что хотите удалить все карточки?'
         windowWarning.style.display = 'flex'
         backdropOn()
-
-        console.log('asd');
     }
 })
 
@@ -468,13 +472,12 @@ async function getUserName () {
 await getUserName();
 console.log(userName);
 
+
 for (let i = 0; i < userName.length; i++) {//добваление имен из масива userName в select
     let newOption = document.createElement('option');
     newOption.classList.add(`user__${[i]}`);
     newOption.innerHTML = userName[i];
     user.appendChild(newOption);
 }
-
-
 
 if (localStorage.getItem('todos')) getName()
