@@ -92,9 +92,7 @@
   font-size: 14px;
   width: 130px;
   text-align: center;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   padding-right: 10px;
 }
 @media (max-width: 560px) {
