@@ -82,7 +82,7 @@ listAddCounter.innerHTML = 0;
 listProgressCounter.innerHTML = 0;
 listDoneCounter.innerHTML = 0;
 
-let cardInProgress = [], todos = []
+let todos = []
 
 // создание новой карточки
 function createCard() {   
@@ -143,7 +143,6 @@ function createCard() {
             user.value = spanUser.innerHTML
             flag = false
         }
-
         if (target == confirmDescriptionBtn) {
             // так применяется ко всем сразу            
                 // spanTitle.innerHTML = descriptionTitle.value
@@ -154,17 +153,15 @@ function createCard() {
                 card.spanDescription = descriptionText.value
 
             flag = true
-        }
-        
+        }        
         if (target == applyBtn) {
-            if (cardInProgress.length < 6) {
+
+            if (listProgressCounter.innerHTML < 6) {
                 listAddCounter.innerHTML = --listAddCounter.innerHTML;
                 listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
-                cardInProgress.push(descriptionTitle.value)
               
                 todo.status = 'In progress'
                 setName()   
-                cardInProgress.push(1)
               
                 card.style.backgroundColor = 'rgb(240, 240, 255)'
                 applyBtn.remove()
@@ -191,7 +188,6 @@ function createCard() {
             setName()
         }
         if (target == backBtn) {
-            cardInProgress.pop()
             listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
             listAddCounter.innerHTML = ++listAddCounter.innerHTML;
             card.style.backgroundColor = 'rgb(152, 223, 138)'
@@ -205,7 +201,6 @@ function createCard() {
             setName()
         }
         if (target == comleteBtn) {
-            cardInProgress.pop()
             listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
             listDoneCounter.innerHTML = ++listDoneCounter.innerHTML;
             card.style.backgroundColor = 'rgb(135, 206, 250)'            
@@ -228,23 +223,15 @@ function createCard() {
     comleteBtn.innerHTML = 'COMPLETE'
 
     const todo = {}
-    // todo.id = 
+    todo.id = userName.indexOf(user.value)
+    todo.user = spanUser.innerHTML
     todo.title = spanTitle.innerHTML
     todo.text = spanDescription.innerHTML
-    todo.user = spanUser.innerHTML
     todo.time = divDate.innerHTML
     todo.status = 'Task'
 
     todos.push(todo)
     setName()
-
-    // function setName() {
-    //     let todoName = ''
-    //     for (let i = 0; i < todos.length; i++) {            
-    //         todoName = `todo ${i}`
-    //     }
-    //     localStorage.setItem(todoName, JSON.stringify(todo))
-    // }
 }
 
 function setName() {
@@ -343,15 +330,94 @@ function getName() {
         } 
     
         const todoNew = {}
-
-        // todoNew.id = array[i].id
+        todoNew.id = array[i].id
+        todoNew.user = array[i].user
         todoNew.title = array[i].title
         todoNew.text = array[i].text
-        todoNew.user = array[i].user
         todoNew.time = array[i].time
         todoNew.status = array[i].status
 
-        todos.push(todoNew)    
+        todos.push(todoNew)
+
+        document.addEventListener('click', ({target}) => {
+            if (target == editBtn) {
+                windowDescription.style.display = 'flex'
+                backdropOn()
+                descriptionText.value = spanDescription.innerHTML
+                descriptionTitle.value = spanTitle.innerHTML
+                user.value = spanUser.innerHTML
+                flag = false
+            }
+            if (target == confirmDescriptionBtn) {
+                // так применяется ко всем сразу            
+                    // spanTitle.innerHTML = descriptionTitle.value
+                    // spanDescription.innerHTML = descriptionText.value
+    
+                // а так не работае кнопка edit
+                    cardNew.spanTitle = descriptionTitle.value
+                    cardNew.spanDescription = descriptionText.value
+    
+                flag = true
+            }        
+            if (target == applyBtn) {
+
+                if (listProgressCounter.innerHTML < 6) {
+                    listAddCounter.innerHTML = --listAddCounter.innerHTML;
+                    listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
+                  
+                    todoNew.status = 'In progress'
+                    setName()   
+                  
+                    cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
+                    applyBtn.remove()
+                    editBtn.remove()
+                    deleteBtn.remove()
+                    divButtons.append(backBtn, comleteBtn)
+                    listProgress.append(cardNew) 
+                } else {
+                    windowWarning.style.display = 'flex'
+                    warningText.innerHTML = 'Сначала нужно выполнить текущие дела'
+                    confirmWarningBtn.remove()
+                    backdropOn()
+                }
+            }
+            if (target == deleteBtn) {
+                if (deleteBtn.closest('.list-add')) {
+                    listAddCounter.innerHTML = --listAddCounter.innerHTML;
+                }
+                if (deleteBtn.closest('.list-done')) {
+                    listDoneCounter.innerHTML = --listDoneCounter.innerHTML;
+                }
+                cardNew.remove()
+                todos.splice(todos.indexOf(todoNew), 1)
+                setName()
+            }
+            if (target == backBtn) {
+                listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
+                listAddCounter.innerHTML = ++listAddCounter.innerHTML;
+                cardNew.style.backgroundColor = 'rgb(152, 223, 138)'
+                divButtons.append(editBtn, deleteBtn)
+                cardItemDescription.append(applyBtn)
+                backBtn.remove()
+                comleteBtn.remove()
+                listContent.append(cardNew)
+    
+                todoNew.status = 'Task'
+                setName()
+            }
+            if (target == comleteBtn) {
+                listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
+                listDoneCounter.innerHTML = ++listDoneCounter.innerHTML;
+                cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
+                backBtn.remove()
+                comleteBtn.remove()
+                divButtons.append(deleteBtn)
+                listDoneContent.append(cardNew)
+    
+                todoNew.status = 'Done'
+                setName()
+            }
+        })    
     }
 }
 
@@ -404,7 +470,7 @@ document.addEventListener('click', ({target}) => {
     }
     // удаление выполненных карточек
     if (target == deleteAllBtn) {
-        warningText.innerHTML = 'Вы уверены, что хотите удалить все карточки?'
+        warningText.innerHTML = 'Вы уверены, что хотите удалить все выполненные карточки?'
         windowWarning.style.display = 'flex'
         backdropOn()
     }
@@ -417,7 +483,7 @@ document.addEventListener('click', ({target}) => {
         backdropOff()
         flag = true
     }
-    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== 'Select user') {
+    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
@@ -435,6 +501,13 @@ document.addEventListener('click', ({target}) => {
     }
     if (target == confirmWarningBtn) {
         //удаление всех карточек
+        listDoneContent.innerHTML = ''
+        listDoneCounter.innerHTML = 0;
+
+        let array = todos.filter(value => value.status !== 'Done')
+        todos = array
+        setName()
+
         windowWarning.style.display = 'none'
         backdropOff()
     }
@@ -467,11 +540,8 @@ async function getUserName () {
     for(let i = 0; i < 5; i++) {
         userName.push(users[i].name.split(' ')[0]);
     }
-    console.log(userName);
 }
 await getUserName();
-console.log(userName);
-
 
 for (let i = 0; i < userName.length; i++) {//добваление имен из масива userName в select
     let newOption = document.createElement('option');
