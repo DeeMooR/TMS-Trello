@@ -114,19 +114,22 @@ function createCard() {
         }
 
         if (target == confirmDescriptionBtn) {
-            // применяется ко всем сразу ??
-            spanTitle.innerHTML = descriptionTitle.value
-            spanDescription.innerHTML = descriptionText.value
+            // так применяется ко всем сразу            
+                // spanTitle.innerHTML = descriptionTitle.value
+                // spanDescription.innerHTML = descriptionText.value
+
+            // а так не работае кнопка edit
+                card.spanTitle = descriptionTitle.value
+                card.spanDescription = descriptionText.value
+
             flag = true
         }
         
         if (target == applyBtn) {
-            cardInProgress.push(descriptionTitle.value)
-
-            todo.status = 'In progress'
-            setName()
-
-            if (cardInProgress.length <= 6) {
+            if (cardInProgress.length < 6) {
+                todo.status = 'In progress'
+                setName()   
+                cardInProgress.push(1)
                 card.style.backgroundColor = 'rgb(240, 240, 255)'
                 applyBtn.remove()
                 editBtn.remove()
@@ -146,6 +149,7 @@ function createCard() {
             setName()
         }
         if (target == backBtn) {
+            cardInProgress.pop()
             card.style.backgroundColor = 'rgb(152, 223, 138)'
             divButtons.append(editBtn, deleteBtn)
             cardItemDescription.append(applyBtn)
@@ -157,6 +161,7 @@ function createCard() {
             setName()
         }
         if (target == comleteBtn) {
+            cardInProgress.pop()
             card.style.backgroundColor = 'rgb(135, 206, 250)'            
             backBtn.remove()
             comleteBtn.remove()
@@ -338,16 +343,12 @@ document.addEventListener('click', ({target}) => {
         backdropOn()
         descriptionTitle.value = '123'
         descriptionText.value = '123'
-
-        console.log('asd');
     }
     // удаление выполненных карточек
     if (target == deleteAllBtn) {
         warningText.innerHTML = 'Вы уверены, что хотите удалить все карточки?'
         windowWarning.style.display = 'flex'
         backdropOn()
-
-        console.log('asd');
     }
 })
 
@@ -358,7 +359,7 @@ document.addEventListener('click', ({target}) => {
         backdropOff()
         flag = true
     }
-    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '') {
+    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
@@ -411,5 +412,14 @@ async function getUserName () {
 }
 await getUserName();
 console.log(userName);
+
+// добавление пользователей в список модального окна
+userName.forEach(name => {
+    let selectUser = document.createElement('option')
+    selectUser.value = name
+    selectUser.innerHTML = name
+    user.append(selectUser)
+});
+
 
 if (localStorage.getItem('todos')) getName()
