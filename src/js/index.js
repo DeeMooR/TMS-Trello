@@ -1,16 +1,18 @@
 'use strict'
 
-if (document.documentElement.clientWidth < 768) {   
-    let listContainer = document.querySelector('.list-container')
-    let dListAdd = document.querySelector('.list-add')
-    let dListProgress = document.querySelector('.list-progress')
-    let dListDone = document.querySelector('.list-done')
+let mySwiper;
 
-    listContainer.setAttribute('class', 'swiper-container list-container list-container-2');
+function initSwiper() {
+    let listContainer = document.querySelector('.list-container');
+    let dListAdd = document.querySelector('.list-add');
+    let dListProgress = document.querySelector('.list-progress');
+    let dListDone = document.querySelector('.list-done');
 
     let htmlListAdd = dListAdd.outerHTML;
     let htmlListProgress = dListProgress.outerHTML;
     let htmlListDone = dListDone.outerHTML;
+
+    listContainer.classList.add('swiper-container');
 
     listContainer.innerHTML = '';
 
@@ -37,7 +39,7 @@ if (document.documentElement.clientWidth < 768) {
     swiperSlideDone.innerHTML = htmlListDone;
     swiperWrapper.append(swiperSlideDone);
 
-    new Swiper('.swiper-container', {
+    mySwiper = new Swiper('.swiper-container', {
         slidesPerView: 1, //кол-во слайдов на странице
         initialSlide: 0,// какой слайд показан
         pagination: {
@@ -48,8 +50,37 @@ if (document.documentElement.clientWidth < 768) {
                 return '<span class="' + className + '">' + wordList[index] + '</span>';
             },
         },
-    });    
+    });
 }
+
+function destroySwiper() {
+    if (mySwiper) {
+        mySwiper.destroy();
+        mySwiper = null;
+    }
+}
+
+function checkWindowSize() {
+    if (document.documentElement.clientWidth < 768) {
+        if (!mySwiper) {
+            initSwiper();
+        }
+    } else {
+        destroySwiper();
+    }
+}
+
+checkWindowSize();//проверяем размер при загрузке страницы
+
+window.addEventListener('resize', checkWindowSize);//проверка размера при изменении ширины страницы
+
+let listAddCounter = document.querySelector('.list-add__header-number');
+let listProgressCounter = document.querySelector('.list-progress__header-number');
+let listDoneCounter = document.querySelector('.list-done__header-number');
+
+listAddCounter.innerHTML = 0;
+listProgressCounter.innerHTML = 0;
+listDoneCounter.innerHTML = 0;
 
 let cardInProgress = [], todos = []
 
@@ -121,6 +152,8 @@ function createCard() {
         }
         
         if (target == applyBtn) {
+            listAddCounter.innerHTML = --listAddCounter.innerHTML;
+            listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
             cardInProgress.push(descriptionTitle.value)
 
             todo.status = 'In progress'
@@ -141,11 +174,19 @@ function createCard() {
             }
         }
         if (target == deleteBtn) {
+            if (deleteBtn.closest('.list-add')) {
+                listAddCounter.innerHTML = --listAddCounter.innerHTML;
+            }
+            if (deleteBtn.closest('.list-done')) {
+                listDoneCounter.innerHTML = --listDoneCounter.innerHTML;
+            }
             card.remove()
             todos.splice(todos.indexOf(todo), 1)
             setName()
         }
         if (target == backBtn) {
+            listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
+            listAddCounter.innerHTML = ++listAddCounter.innerHTML;
             card.style.backgroundColor = 'rgb(152, 223, 138)'
             divButtons.append(editBtn, deleteBtn)
             cardItemDescription.append(applyBtn)
@@ -157,6 +198,8 @@ function createCard() {
             setName()
         }
         if (target == comleteBtn) {
+            listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
+            listDoneCounter.innerHTML = ++listDoneCounter.innerHTML;
             card.style.backgroundColor = 'rgb(135, 206, 250)'            
             backBtn.remove()
             comleteBtn.remove()
@@ -278,6 +321,18 @@ function getName() {
             divButtons.append(deleteBtn)
             listDoneContent.append(cardNew)
         }
+
+        if(listContent.childElementCount) {
+            listAddCounter.innerHTML = listContent.childElementCount;
+        } 
+
+        if(listProgress.childElementCount) {
+            listProgressCounter.innerHTML = listProgress.childElementCount;
+        } 
+
+        if(listDoneContent.childElementCount) {
+            listDoneCounter.innerHTML = listDoneContent.childElementCount;
+        } 
     
         const todoNew = {}
 
@@ -362,6 +417,7 @@ document.addEventListener('click', ({target}) => {
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
+            listAddCounter.innerHTML = ++listAddCounter.innerHTML;
             createCard()
         }
     }
@@ -414,9 +470,11 @@ console.log(userName);
 
 for (let i = 0; i < userName.length; i++) {//добваление имен из масива userName в select
     let newOption = document.createElement('option');
-    newOption.classList.add(`user__${[i]}`)
+    newOption.classList.add(`user__${[i]}`);
     newOption.innerHTML = userName[i];
-    user.appendChild(newOption)
+    user.appendChild(newOption);
 }
+
+
 
 if (localStorage.getItem('todos')) getName()
