@@ -1,83 +1,67 @@
 'use strict'
 
-let cardInProgress = [] 
-let todos = []
-
 let mySwiper;
 
-let listContainer = document.querySelector('.list-container');
-let dListAdd = document.querySelector('.list-add');
-let dListProgress = document.querySelector('.list-progress');
-let dListDone = document.querySelector('.list-done');
-
-let htmlListAdd = dListAdd.outerHTML;
-let htmlListProgress = dListProgress.outerHTML;
-let htmlListDone = dListDone.outerHTML;
-
-let listAddCounter = document.querySelector('.list-add__header-number');
-let listProgressCounter = document.querySelector('.list-progress__header-number');
-let listDoneCounter = document.querySelector('.list-done__header-number');
-
-listAddCounter.innerHTML = 0;
-listProgressCounter.innerHTML = 0;
-listDoneCounter.innerHTML = 0;
-
 function initSwiper() {
-    if (array !== null) {
-        listContainer.classList.add('swiper-container');
+    let listContainer = document.querySelector('.list-container');
+    let dListAdd = document.querySelector('.list-add');
+    let dListProgress = document.querySelector('.list-progress');
+    let dListDone = document.querySelector('.list-done');
 
-        listContainer.innerHTML = '';
-        // dListAdd.children[1].innerHTML = ''
-        
-        let swiperWrapper = document.createElement('div');
-        swiperWrapper.classList = "swiper-wrapper";
-        listContainer.append(swiperWrapper);
-    
-        let swiperPagination = document.createElement('div');
-        swiperPagination.classList = "swiper-pagination";
-        listContainer.append(swiperPagination);
-    
-        let swiperSlideAdd = document.createElement('div');
-        swiperSlideAdd.classList = "swiper-slide";
-        swiperSlideAdd.append(dListAdd)
-        swiperWrapper.append(swiperSlideAdd);
-        
-        let swiperSlideProgress = document.createElement('div');
-        swiperSlideProgress.classList = "swiper-slide";
-        swiperSlideProgress.append(dListProgress);
-        swiperWrapper.append(swiperSlideProgress);
-    
-        let swiperSlideDone = document.createElement('div');
-        swiperSlideDone.classList = "swiper-slide";
-        swiperSlideDone.append(dListDone);
-        swiperWrapper.append(swiperSlideDone);
+    let htmlListAdd = dListAdd.outerHTML;
+    let htmlListProgress = dListProgress.outerHTML;
+    let htmlListDone = dListDone.outerHTML;
 
-        mySwiper = new Swiper('.swiper-container', {
-            slidesPerView: 1, //кол-во слайдов на странице
-            initialSlide: 0,// какой слайд показан
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                renderBullet: function (index, className) {
-                    let wordList = ['TODO', 'IN PROGRESS', 'DONE'];
-                    return '<span class="' + className + '">' + wordList[index] + '</span>';
-                },
+    listContainer.classList.add('swiper-container');
+
+    listContainer.innerHTML = '';
+
+    let swiperWrapper = document.createElement('div');
+    swiperWrapper.classList = "swiper-wrapper";
+    listContainer.append(swiperWrapper);
+
+    let swiperPagination = document.createElement('div');
+    swiperPagination.classList = "swiper-pagination";
+    listContainer.append(swiperPagination);
+
+    let swiperSlideAdd = document.createElement('div');
+    swiperSlideAdd.classList = "swiper-slide";
+    swiperSlideAdd.innerHTML = htmlListAdd;
+    swiperWrapper.append(swiperSlideAdd);
+
+    let swiperSlideProgress = document.createElement('div');
+    swiperSlideProgress.classList = "swiper-slide";
+    swiperSlideProgress.innerHTML = htmlListProgress;
+    swiperWrapper.append(swiperSlideProgress);
+
+    let swiperSlideDone = document.createElement('div');
+    swiperSlideDone.classList = "swiper-slide";
+    swiperSlideDone.innerHTML = htmlListDone;
+    swiperWrapper.append(swiperSlideDone);
+
+    mySwiper = new Swiper('.swiper-container', {
+        slidesPerView: 1, //кол-во слайдов на странице
+        initialSlide: 0,// какой слайд показан
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function (index, className) {
+                let wordList = ['TODO', 'IN PROGRESS', 'DONE'];
+                return '<span class="' + className + '">' + wordList[index] + '</span>';
             },
-        });
-    }
+        },
+    });
 }
 
 function destroySwiper() {
     if (mySwiper) {
-        listContainer.innerHTML = '';
-        listContainer.innerHTML = dListAdd.outerHTML + dListProgress.outerHTML + dListDone.outerHTML;
         mySwiper.destroy();
         mySwiper = null;
     }
 }
 
 function checkWindowSize() {
-    if (document.documentElement.clientWidth <= 768) {
+    if (document.documentElement.clientWidth < 768) {
         if (!mySwiper) {
             initSwiper();
         }
@@ -89,6 +73,16 @@ function checkWindowSize() {
 checkWindowSize();//проверяем размер при загрузке страницы
 
 window.addEventListener('resize', checkWindowSize);//проверка размера при изменении ширины страницы
+
+let listAddCounter = document.querySelector('.list-add__header-number');
+let listProgressCounter = document.querySelector('.list-progress__header-number');
+let listDoneCounter = document.querySelector('.list-done__header-number');
+
+listAddCounter.innerHTML = 0;
+listProgressCounter.innerHTML = 0;
+listDoneCounter.innerHTML = 0;
+
+let todos = []
 
 // создание новой карточки
 function createCard() {   
@@ -246,6 +240,7 @@ function setName() {
 
 function getName() {
     let array = JSON.parse(localStorage.getItem('todos'))
+    
     for (let i = 0; i < array.length; i++) {
         let cardNew = document.createElement('div')
         cardNew.classList.add('list-add__card', 'card')
@@ -465,8 +460,6 @@ function backdropOff() {
     backdrop.style.opacity = '0'
 }
 
-
-/*--------------------------------------------------------------------------Слушатель событий---------------------------------------------------------------------*/
 document.addEventListener('click', ({target}) => {
     // добавление новой карточки
     if (target == addContentBtn) {
@@ -474,7 +467,6 @@ document.addEventListener('click', ({target}) => {
         backdropOn()
         descriptionTitle.value = '123'
         descriptionText.value = '123'
-        console.log('asd');
     }
     // удаление выполненных карточек
     if (target == deleteAllBtn) {
@@ -521,7 +513,6 @@ document.addEventListener('click', ({target}) => {
     }
 })
 
-/*--------------------------------------------------------------------------Часы-------------------------------------------------------------------------------------*/
 let clock = document.querySelector('.clock')
 
 function getTimeForClock() {
@@ -542,7 +533,6 @@ function getTimeForClock() {
 
 getTimeForClock();
 
-/*--------------------------------------------------------------------------Получение имен пользователей----------------------------------------------------------*/
 let userName = [];
 async function getUserName () {
     const responce = await fetch(`https://jsonplaceholder.typicode.com/users`);
@@ -550,7 +540,6 @@ async function getUserName () {
     for(let i = 0; i < 5; i++) {
         userName.push(users[i].name.split(' ')[0]);
     }
-    // console.log(userName);
 }
 await getUserName();
 
@@ -561,7 +550,4 @@ for (let i = 0; i < userName.length; i++) {//добваление имен из 
     user.appendChild(newOption);
 }
 
-// if (localStorage.getItem('todos')) getName()
-console.log(array);
-// console.log(todos);
 if (localStorage.getItem('todos')) getName()
