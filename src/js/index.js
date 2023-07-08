@@ -2,16 +2,16 @@
 
 let mySwiper;
 
+let listContainer = document.querySelector('.list-container');
+let dListAdd = document.querySelector('.list-add');
+let dListProgress = document.querySelector('.list-progress');
+let dListDone = document.querySelector('.list-done');
+
+let htmlListAdd = dListAdd.outerHTML;
+let htmlListProgress = dListProgress.outerHTML;
+let htmlListDone = dListDone.outerHTML;
+
 function initSwiper() {
-    let listContainer = document.querySelector('.list-container');
-    let dListAdd = document.querySelector('.list-add');
-    let dListProgress = document.querySelector('.list-progress');
-    let dListDone = document.querySelector('.list-done');
-
-    let htmlListAdd = dListAdd.outerHTML;
-    let htmlListProgress = dListProgress.outerHTML;
-    let htmlListDone = dListDone.outerHTML;
-
     listContainer.classList.add('swiper-container');
 
     listContainer.innerHTML = '';
@@ -26,17 +26,17 @@ function initSwiper() {
 
     let swiperSlideAdd = document.createElement('div');
     swiperSlideAdd.classList = "swiper-slide";
-    swiperSlideAdd.innerHTML = htmlListAdd;
+    swiperSlideAdd.innerHTML = dListAdd.outerHTML;
     swiperWrapper.append(swiperSlideAdd);
 
     let swiperSlideProgress = document.createElement('div');
     swiperSlideProgress.classList = "swiper-slide";
-    swiperSlideProgress.innerHTML = htmlListProgress;
+    swiperSlideProgress.innerHTML = dListProgress.outerHTML;
     swiperWrapper.append(swiperSlideProgress);
 
     let swiperSlideDone = document.createElement('div');
     swiperSlideDone.classList = "swiper-slide";
-    swiperSlideDone.innerHTML = htmlListDone;
+    swiperSlideDone.innerHTML = dListDone.outerHTML;
     swiperWrapper.append(swiperSlideDone);
 
     mySwiper = new Swiper('.swiper-container', {
@@ -55,13 +55,16 @@ function initSwiper() {
 
 function destroySwiper() {
     if (mySwiper) {
+        listContainer.innerHTML = '';
+        listContainer.innerHTML = dListAdd.outerHTML + dListProgress.outerHTML + dListDone.outerHTML;
+        getName()
         mySwiper.destroy();
         mySwiper = null;
     }
 }
 
 function checkWindowSize() {
-    if (document.documentElement.clientWidth < 768) {
+    if (document.documentElement.clientWidth <= 768) {
         if (!mySwiper) {
             initSwiper();
         }
@@ -245,105 +248,106 @@ function setName() {
 
 function getName() {
     let array = JSON.parse(localStorage.getItem('todos'))
-
-    for (let i = 0; i < array.length; i++) {
-        let cardNew = document.createElement('div')
-        cardNew.classList.add('list-add__card', 'card')
-        cardNew[i]
-    
-        let cardItemTitle = document.createElement('div')
-        cardItemTitle.setAttribute('class', 'card__item')
-    
-        let cardItemDescription = document.createElement('div')
-        cardItemDescription.setAttribute('class', 'card__item')
-    
-        let cardItemUser = document.createElement('div')
-        cardItemUser.setAttribute('class', 'card__item')
-    
-        let spanTitle = document.createElement('span')
-        spanTitle.innerHTML = array[i].title
-    
-        let divButtons = document.createElement('div')
-    
-        let editBtn = document.createElement('button')
-        editBtn.setAttribute('type', 'button')
-        editBtn.classList.add('card-item__btn', 'edit-btn')
-        editBtn.innerHTML = 'EDIT'
-    
-        let deleteBtn = document.createElement('button')
-        deleteBtn.classList.add('card-item__btn', 'delete-btn')
-        deleteBtn.innerHTML = 'DELETE'
-    
-        let spanDescription = document.createElement('span')
-        spanDescription.innerHTML = array[i].text
-    
-        let applyBtn = document.createElement('button')
-        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
-        applyBtn.innerHTML = '>'
-    
-        let spanUser = document.createElement('span')
-        spanUser.innerHTML = array[i].user
-    
-        let divDate = document.createElement('div')
-        divDate.setAttribute('class', 'date')
-        divDate.innerHTML = array[i].time
-    
-        let backBtn = document.createElement('button')
-        backBtn.classList.add('card-item__btn', 'back-btn')
-        backBtn.innerHTML = 'BACK'
+    if (array !== null) {
+        for (let i = 0; i < array.length; i++) {
+            let cardNew = document.createElement('div')
+            cardNew.classList.add('list-add__card', 'card')
+            cardNew[i]
+        
+            let cardItemTitle = document.createElement('div')
+            cardItemTitle.setAttribute('class', 'card__item')
+        
+            let cardItemDescription = document.createElement('div')
+            cardItemDescription.setAttribute('class', 'card__item')
+        
+            let cardItemUser = document.createElement('div')
+            cardItemUser.setAttribute('class', 'card__item')
+        
+            let spanTitle = document.createElement('span')
+            spanTitle.innerHTML = array[i].title
+        
+            let divButtons = document.createElement('div')
+        
+            let editBtn = document.createElement('button')
+            editBtn.setAttribute('type', 'button')
+            editBtn.classList.add('card-item__btn', 'edit-btn')
+            editBtn.innerHTML = 'EDIT'
+        
+            let deleteBtn = document.createElement('button')
+            deleteBtn.classList.add('card-item__btn', 'delete-btn')
+            deleteBtn.innerHTML = 'DELETE'
+        
+            let spanDescription = document.createElement('span')
+            spanDescription.innerHTML = array[i].text
+        
+            let applyBtn = document.createElement('button')
+            applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
+            applyBtn.innerHTML = '>'
+        
+            let spanUser = document.createElement('span')
+            spanUser.innerHTML = array[i].user
+        
+            let divDate = document.createElement('div')
+            divDate.setAttribute('class', 'date')
+            divDate.innerHTML = array[i].time
+        
+            let backBtn = document.createElement('button')
+            backBtn.classList.add('card-item__btn', 'back-btn')
+            backBtn.innerHTML = 'BACK'
+                
+            let comleteBtn = document.createElement('button')
+            comleteBtn.classList.add('card-item__btn', 'comlete-btn')
+            comleteBtn.innerHTML = 'COMPLETE'
+        
+            divButtons.append(editBtn, deleteBtn)
+            cardItemTitle.append(spanTitle, divButtons)
+            cardItemDescription.append(spanDescription, applyBtn)
+            cardItemUser.append(spanUser, divDate)
+        
+            cardNew.append(cardItemTitle, cardItemDescription, cardItemUser)
             
-        let comleteBtn = document.createElement('button')
-        comleteBtn.classList.add('card-item__btn', 'comlete-btn')
-        comleteBtn.innerHTML = 'COMPLETE'
+            if (array[i].status === 'Task') listContent.append(cardNew)
+            if (array[i].status === 'In progress') {
+                cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
+                applyBtn.remove()
+                editBtn.remove()
+                deleteBtn.remove()
+                divButtons.append(backBtn, comleteBtn)
+                listProgress.append(cardNew)
+            }
+            if (array[i].status === 'Done') {
+                cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
+                backBtn.remove()
+                comleteBtn.remove()
+                editBtn.remove()
+                applyBtn.remove()
+                divButtons.append(deleteBtn)
+                listDoneContent.append(cardNew)
+            }
     
-        divButtons.append(editBtn, deleteBtn)
-        cardItemTitle.append(spanTitle, divButtons)
-        cardItemDescription.append(spanDescription, applyBtn)
-        cardItemUser.append(spanUser, divDate)
+            if(listContent.childElementCount) {
+                listAddCounter.innerHTML = listContent.childElementCount;
+            } 
     
-        cardNew.append(cardItemTitle, cardItemDescription, cardItemUser)
-
-        if (array[i].status === 'Task') listContent.append(cardNew)
-        if (array[i].status === 'In progress') {
-            cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
-            applyBtn.remove()
-            editBtn.remove()
-            deleteBtn.remove()
-            divButtons.append(backBtn, comleteBtn)
-            listProgress.append(cardNew)
+            if(listProgress.childElementCount) {
+                listProgressCounter.innerHTML = listProgress.childElementCount;
+            } 
+    
+            if(listDoneContent.childElementCount) {
+                listDoneCounter.innerHTML = listDoneContent.childElementCount;
+            } 
+        
+            const todoNew = {}
+    
+            // todoNew.id = array[i].id
+            todoNew.title = array[i].title
+            todoNew.text = array[i].text
+            todoNew.user = array[i].user
+            todoNew.time = array[i].time
+            todoNew.status = array[i].status
+    
+            todos.push(todoNew)    
         }
-        if (array[i].status === 'Done') {
-            cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
-            backBtn.remove()
-            comleteBtn.remove()
-            editBtn.remove()
-            applyBtn.remove()
-            divButtons.append(deleteBtn)
-            listDoneContent.append(cardNew)
-        }
-
-        if(listContent.childElementCount) {
-            listAddCounter.innerHTML = listContent.childElementCount;
-        } 
-
-        if(listProgress.childElementCount) {
-            listProgressCounter.innerHTML = listProgress.childElementCount;
-        } 
-
-        if(listDoneContent.childElementCount) {
-            listDoneCounter.innerHTML = listDoneContent.childElementCount;
-        } 
-    
-        const todoNew = {}
-
-        // todoNew.id = array[i].id
-        todoNew.title = array[i].title
-        todoNew.text = array[i].text
-        todoNew.user = array[i].user
-        todoNew.time = array[i].time
-        todoNew.status = array[i].status
-
-        todos.push(todoNew)    
     }
 }
 
