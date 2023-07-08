@@ -2,16 +2,16 @@
 
 let mySwiper;
 
+let listContainer = document.querySelector('.list-container');
+let dListAdd = document.querySelector('.list-add');
+let dListProgress = document.querySelector('.list-progress');
+let dListDone = document.querySelector('.list-done');
+
+let htmlListAdd = dListAdd.outerHTML;
+let htmlListProgress = dListProgress.outerHTML;
+let htmlListDone = dListDone.outerHTML;
+
 function initSwiper() {
-    let listContainer = document.querySelector('.list-container');
-    let dListAdd = document.querySelector('.list-add');
-    let dListProgress = document.querySelector('.list-progress');
-    let dListDone = document.querySelector('.list-done');
-
-    let htmlListAdd = dListAdd.outerHTML;
-    let htmlListProgress = dListProgress.outerHTML;
-    let htmlListDone = dListDone.outerHTML;
-
     listContainer.classList.add('swiper-container');
 
     listContainer.innerHTML = '';
@@ -26,17 +26,17 @@ function initSwiper() {
 
     let swiperSlideAdd = document.createElement('div');
     swiperSlideAdd.classList = "swiper-slide";
-    swiperSlideAdd.innerHTML = htmlListAdd;
+    swiperSlideAdd.append(dListAdd);
     swiperWrapper.append(swiperSlideAdd);
 
     let swiperSlideProgress = document.createElement('div');
     swiperSlideProgress.classList = "swiper-slide";
-    swiperSlideProgress.innerHTML = htmlListProgress;
+    swiperSlideProgress.append(dListProgress);
     swiperWrapper.append(swiperSlideProgress);
 
     let swiperSlideDone = document.createElement('div');
     swiperSlideDone.classList = "swiper-slide";
-    swiperSlideDone.innerHTML = htmlListDone;
+    swiperSlideDone.append(dListDone);
     swiperWrapper.append(swiperSlideDone);
 
     mySwiper = new Swiper('.swiper-container', {
@@ -55,13 +55,15 @@ function initSwiper() {
 
 function destroySwiper() {
     if (mySwiper) {
+        listContainer.innerHTML = '';
+        listContainer.append(dListAdd,dListProgress,dListDone);
         mySwiper.destroy();
         mySwiper = null;
     }
 }
 
 function checkWindowSize() {
-    if (document.documentElement.clientWidth < 768) {
+    if (document.documentElement.clientWidth <= 768) {
         if (!mySwiper) {
             initSwiper();
         }
