@@ -246,8 +246,6 @@ function setName() {
 
 function getName() {
     let array = JSON.parse(localStorage.getItem('todos'))
-
-    
     for (let i = 0; i < array.length; i++) {
         let cardNew = document.createElement('div')
         cardNew.classList.add('list-add__card', 'card')
