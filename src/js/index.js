@@ -292,23 +292,26 @@ function createCard() {
             user.value = spanUser.innerHTML
             flag = false
         }
-
         if (target == confirmDescriptionBtn) {
-            // применяется ко всем сразу ??
-            spanTitle.innerHTML = descriptionTitle.value
-            spanDescription.innerHTML = descriptionText.value
+            // так применяется ко всем сразу            
+                // spanTitle.innerHTML = descriptionTitle.value
+                // spanDescription.innerHTML = descriptionText.value
+
+            // а так не работае кнопка edit
+                card.spanTitle = descriptionTitle.value
+                card.spanDescription = descriptionText.value
+
             flag = true
-        }
-        
+        }        
         if (target == applyBtn) {
-            listAddCounter.innerHTML = --listAddCounter.innerHTML;
-            listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
-            cardInProgress.push(descriptionTitle.value)
 
-            todo.status = 'In progress'
-            setName()
-
-            if (cardInProgress.length <= 6) {
+            if (listProgressCounter.innerHTML < 6) {
+                listAddCounter.innerHTML = --listAddCounter.innerHTML;
+                listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
+              
+                todo.status = 'In progress'
+                setName()   
+              
                 card.style.backgroundColor = 'rgb(240, 240, 255)'
                 applyBtn.remove()
                 editBtn.remove()
@@ -369,23 +372,15 @@ function createCard() {
     comleteBtn.innerHTML = 'COMPLETE'
 
     const todo = {}
-    // todo.id = 
+    todo.id = userName.indexOf(user.value)
+    todo.user = spanUser.innerHTML
     todo.title = spanTitle.innerHTML
     todo.text = spanDescription.innerHTML
-    todo.user = spanUser.innerHTML
     todo.time = divDate.innerHTML
     todo.status = 'Task'
 
     todos.push(todo)
     setName()
-
-    // function setName() {
-    //     let todoName = ''
-    //     for (let i = 0; i < todos.length; i++) {            
-    //         todoName = `todo ${i}`
-    //     }
-    //     localStorage.setItem(todoName, JSON.stringify(todo))
-    // }
 }
 
 function backdropOn() {
@@ -410,11 +405,9 @@ document.addEventListener('click', ({target}) => {
     }
     // удаление выполненных карточек
     if (target == deleteAllBtn) {
-        warningText.innerHTML = 'Вы уверены, что хотите удалить все карточки?'
+        warningText.innerHTML = 'Вы уверены, что хотите удалить все выполненные карточки?'
         windowWarning.style.display = 'flex'
         backdropOn()
-
-        console.log('asd');
     }
 })
 
@@ -425,7 +418,7 @@ document.addEventListener('click', ({target}) => {
         backdropOff()
         flag = true
     }
-    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== 'Select user') {
+    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
@@ -443,6 +436,13 @@ document.addEventListener('click', ({target}) => {
     }
     if (target == confirmWarningBtn) {
         //удаление всех карточек
+        listDoneContent.innerHTML = ''
+        listDoneCounter.innerHTML = 0;
+
+        let array = todos.filter(value => value.status !== 'Done')
+        todos = array
+        setName()
+
         windowWarning.style.display = 'none'
         backdropOff()
     }
@@ -480,7 +480,6 @@ async function getUserName () {
     // console.log(userName);
 }
 await getUserName();
-console.log(userName);
 
 for (let i = 0; i < userName.length; i++) {//добваление имен из масива userName в select
     let newOption = document.createElement('option');
@@ -489,8 +488,7 @@ for (let i = 0; i < userName.length; i++) {//добваление имен из 
     user.appendChild(newOption);
 }
 
-
-
 // if (localStorage.getItem('todos')) getName()
 console.log(array);
 // console.log(todos);
+if (localStorage.getItem('todos')) getName()
