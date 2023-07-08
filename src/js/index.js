@@ -3,39 +3,6 @@
 let cardInProgress = [] 
 let todos = []
 
-let array = getName() || [];
-
-//карточка "Task"
-let listAddContent = document.querySelector('.list-add')
-let listContent = document.querySelector('.list-add__content')
-let addContentBtn = document.querySelector('.add-btn')
-
-//карточка "In progress"
-let listProgress = document.querySelector('.list-progress__content')
-
-//карточка "Done"
-let listDone = document.querySelector('.list-done')
-let listDoneContent = document.querySelector('.list-done__content')
-let deleteAllBtn = document.querySelector('.delete-all-btn')
-
-//модальное окно "Description!"
-let windowDescription = document.querySelector('.window-description') 
-let descriptionTitle = document.querySelector('.description__title')
-let descriptionText = document.querySelector('.description__text')
-let cancelDescriptionBtn = document.querySelector('.description-cancel-btn')
-let confirmDescriptionBtn = document.querySelector('.description-confirm-btn')
-let user = document.querySelector('select')
-let flag = true;
-
-//модальное окно "Warning!"
-let windowWarning = document.querySelector('.window-warning') 
-let cancelWarningBtn = document.querySelector('.warning-cancel-btn')
-let confirmWarningBtn = document.querySelector('.warning-confirm-btn')
-let warningText = document.querySelector('.warning__text')
-
-//затемнение фона
-let backdrop = document.querySelector('.backdrop')
-
 let mySwiper;
 
 let listContainer = document.querySelector('.list-container');
@@ -54,116 +21,6 @@ let listDoneCounter = document.querySelector('.list-done__header-number');
 listAddCounter.innerHTML = 0;
 listProgressCounter.innerHTML = 0;
 listDoneCounter.innerHTML = 0;
-
-function setName() {
-    localStorage.setItem('todos', JSON.stringify(todos));
-}
-
-function getName() {
-    return JSON.parse(localStorage.getItem('todos'));
-}
-
-if (array !== null) {
-    array.forEach(function(item) {
-        let cardNew = document.createElement('div')
-        cardNew.classList.add('list-add__card', 'card')
-    
-        let cardItemTitle = document.createElement('div')
-        cardItemTitle.setAttribute('class', 'card__item')
-    
-        let cardItemDescription = document.createElement('div')
-        cardItemDescription.setAttribute('class', 'card__item')
-    
-        let cardItemUser = document.createElement('div')
-        cardItemUser.setAttribute('class', 'card__item')
-    
-        let spanTitle = document.createElement('span')
-        spanTitle.innerHTML = item.title
-    
-        let divButtons = document.createElement('div')
-    
-        let editBtn = document.createElement('button')
-        editBtn.setAttribute('type', 'button')
-        editBtn.classList.add('card-item__btn', 'edit-btn')
-        editBtn.innerHTML = 'EDIT'
-    
-        let deleteBtn = document.createElement('button')
-        deleteBtn.classList.add('card-item__btn', 'delete-btn')
-        deleteBtn.innerHTML = 'DELETE'
-    
-        let spanDescription = document.createElement('span')
-        spanDescription.innerHTML = item.text
-    
-        let applyBtn = document.createElement('button')
-        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
-        applyBtn.innerHTML = '>'
-    
-        let spanUser = document.createElement('span')
-        spanUser.innerHTML = item.user
-    
-        let divDate = document.createElement('div')
-        divDate.setAttribute('class', 'date')
-        divDate.innerHTML = item.time
-    
-        let backBtn = document.createElement('button')
-        backBtn.classList.add('card-item__btn', 'back-btn')
-        backBtn.innerHTML = 'BACK'
-            
-        let comleteBtn = document.createElement('button')
-        comleteBtn.classList.add('card-item__btn', 'comlete-btn')
-        comleteBtn.innerHTML = 'COMPLETE'
-    
-        divButtons.append(editBtn, deleteBtn)
-        cardItemTitle.append(spanTitle, divButtons)
-        cardItemDescription.append(spanDescription, applyBtn)
-        cardItemUser.append(spanUser, divDate)
-    
-        cardNew.append(cardItemTitle, cardItemDescription, cardItemUser)
-        
-        if (item.status === 'Task') {listContent.append(cardNew)}
-        if (item.status === 'In progress') {
-            cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
-            applyBtn.remove()
-            editBtn.remove()
-            deleteBtn.remove()
-            divButtons.append(backBtn, comleteBtn)
-            listProgress.append(cardNew)
-        }
-        if (item.status === 'Done') {
-            cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
-            backBtn.remove()
-            comleteBtn.remove()
-            editBtn.remove()
-            applyBtn.remove()
-            divButtons.append(deleteBtn)
-            listDoneContent.append(cardNew)
-        }
-
-        if(listContent.childElementCount) {
-            listAddCounter.innerHTML = listContent.childElementCount;
-        } 
-
-        if(listProgress.childElementCount) {
-            listProgressCounter.innerHTML = listProgress.childElementCount;
-        } 
-
-        if(listDoneContent.childElementCount) {
-            listDoneCounter.innerHTML = listDoneContent.childElementCount;
-        } 
-    
-        const todoNew = {}
-
-        // todoNew.id = array[i].id
-        todoNew.title = item.title
-        todoNew.text = item.text
-        todoNew.user = item.user
-        todoNew.time = item.time
-        todoNew.status = item.status
-
-        todos.push(todoNew)  
-        console.log(todos);  
-    })
-}
 
 function initSwiper() {
     if (array !== null) {
@@ -383,6 +240,224 @@ function createCard() {
     setName()
 }
 
+function setName() {
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+function getName() {
+    let array = JSON.parse(localStorage.getItem('todos'))
+
+    
+    for (let i = 0; i < array.length; i++) {
+        let cardNew = document.createElement('div')
+        cardNew.classList.add('list-add__card', 'card')
+        cardNew[i]
+    
+        let cardItemTitle = document.createElement('div')
+        cardItemTitle.setAttribute('class', 'card__item')
+    
+        let cardItemDescription = document.createElement('div')
+        cardItemDescription.setAttribute('class', 'card__item')
+    
+        let cardItemUser = document.createElement('div')
+        cardItemUser.setAttribute('class', 'card__item')
+    
+        let spanTitle = document.createElement('span')
+        spanTitle.innerHTML = array[i].title
+    
+        let divButtons = document.createElement('div')
+    
+        let editBtn = document.createElement('button')
+        editBtn.setAttribute('type', 'button')
+        editBtn.classList.add('card-item__btn', 'edit-btn')
+        editBtn.innerHTML = 'EDIT'
+    
+        let deleteBtn = document.createElement('button')
+        deleteBtn.classList.add('card-item__btn', 'delete-btn')
+        deleteBtn.innerHTML = 'DELETE'
+    
+        let spanDescription = document.createElement('span')
+        spanDescription.innerHTML = array[i].text
+    
+        let applyBtn = document.createElement('button')
+        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
+        applyBtn.innerHTML = '>'
+    
+        let spanUser = document.createElement('span')
+        spanUser.innerHTML = array[i].user
+    
+        let divDate = document.createElement('div')
+        divDate.setAttribute('class', 'date')
+        divDate.innerHTML = array[i].time
+    
+        let backBtn = document.createElement('button')
+        backBtn.classList.add('card-item__btn', 'back-btn')
+        backBtn.innerHTML = 'BACK'
+            
+        let comleteBtn = document.createElement('button')
+        comleteBtn.classList.add('card-item__btn', 'comlete-btn')
+        comleteBtn.innerHTML = 'COMPLETE'
+    
+        divButtons.append(editBtn, deleteBtn)
+        cardItemTitle.append(spanTitle, divButtons)
+        cardItemDescription.append(spanDescription, applyBtn)
+        cardItemUser.append(spanUser, divDate)
+    
+        cardNew.append(cardItemTitle, cardItemDescription, cardItemUser)
+
+        if (array[i].status === 'Task') listContent.append(cardNew)
+        if (array[i].status === 'In progress') {
+            cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
+            applyBtn.remove()
+            editBtn.remove()
+            deleteBtn.remove()
+            divButtons.append(backBtn, comleteBtn)
+            listProgress.append(cardNew)
+        }
+        if (array[i].status === 'Done') {
+            cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
+            backBtn.remove()
+            comleteBtn.remove()
+            editBtn.remove()
+            applyBtn.remove()
+            divButtons.append(deleteBtn)
+            listDoneContent.append(cardNew)
+        }
+
+        if(listContent.childElementCount) {
+            listAddCounter.innerHTML = listContent.childElementCount;
+        } 
+
+        if(listProgress.childElementCount) {
+            listProgressCounter.innerHTML = listProgress.childElementCount;
+        } 
+
+        if(listDoneContent.childElementCount) {
+            listDoneCounter.innerHTML = listDoneContent.childElementCount;
+        } 
+    
+        const todoNew = {}
+        todoNew.id = array[i].id
+        todoNew.user = array[i].user
+        todoNew.title = array[i].title
+        todoNew.text = array[i].text
+        todoNew.time = array[i].time
+        todoNew.status = array[i].status
+
+        todos.push(todoNew)
+
+        document.addEventListener('click', ({target}) => {
+            if (target == editBtn) {
+                windowDescription.style.display = 'flex'
+                backdropOn()
+                descriptionText.value = spanDescription.innerHTML
+                descriptionTitle.value = spanTitle.innerHTML
+                user.value = spanUser.innerHTML
+                flag = false
+            }
+            if (target == confirmDescriptionBtn) {
+                // так применяется ко всем сразу            
+                    // spanTitle.innerHTML = descriptionTitle.value
+                    // spanDescription.innerHTML = descriptionText.value
+    
+                // а так не работае кнопка edit
+                    cardNew.spanTitle = descriptionTitle.value
+                    cardNew.spanDescription = descriptionText.value
+    
+                flag = true
+            }        
+            if (target == applyBtn) {
+
+                if (listProgressCounter.innerHTML < 6) {
+                    listAddCounter.innerHTML = --listAddCounter.innerHTML;
+                    listProgressCounter.innerHTML = ++listProgressCounter.innerHTML;
+                  
+                    todoNew.status = 'In progress'
+                    setName()   
+                  
+                    cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
+                    applyBtn.remove()
+                    editBtn.remove()
+                    deleteBtn.remove()
+                    divButtons.append(backBtn, comleteBtn)
+                    listProgress.append(cardNew) 
+                } else {
+                    windowWarning.style.display = 'flex'
+                    warningText.innerHTML = 'Сначала нужно выполнить текущие дела'
+                    confirmWarningBtn.remove()
+                    backdropOn()
+                }
+            }
+            if (target == deleteBtn) {
+                if (deleteBtn.closest('.list-add')) {
+                    listAddCounter.innerHTML = --listAddCounter.innerHTML;
+                }
+                if (deleteBtn.closest('.list-done')) {
+                    listDoneCounter.innerHTML = --listDoneCounter.innerHTML;
+                }
+                cardNew.remove()
+                todos.splice(todos.indexOf(todoNew), 1)
+                setName()
+            }
+            if (target == backBtn) {
+                listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
+                listAddCounter.innerHTML = ++listAddCounter.innerHTML;
+                cardNew.style.backgroundColor = 'rgb(152, 223, 138)'
+                divButtons.append(editBtn, deleteBtn)
+                cardItemDescription.append(applyBtn)
+                backBtn.remove()
+                comleteBtn.remove()
+                listContent.append(cardNew)
+    
+                todoNew.status = 'Task'
+                setName()
+            }
+            if (target == comleteBtn) {
+                listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
+                listDoneCounter.innerHTML = ++listDoneCounter.innerHTML;
+                cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
+                backBtn.remove()
+                comleteBtn.remove()
+                divButtons.append(deleteBtn)
+                listDoneContent.append(cardNew)
+    
+                todoNew.status = 'Done'
+                setName()
+            }
+        })    
+    }
+}
+
+//карточка "Task"
+let listAddContent = document.querySelector('.list-add')
+let listContent = document.querySelector('.list-add__content')
+let addContentBtn = document.querySelector('.add-btn')
+
+//карточка "In progress"
+let listProgress = document.querySelector('.list-progress__content')
+
+//карточка "Done"
+let listDone = document.querySelector('.list-done')
+let listDoneContent = document.querySelector('.list-done__content')
+let deleteAllBtn = document.querySelector('.delete-all-btn')
+
+//модальное окно "Description!"
+let windowDescription = document.querySelector('.window-description') 
+let descriptionTitle = document.querySelector('.description__title')
+let descriptionText = document.querySelector('.description__text')
+let cancelDescriptionBtn = document.querySelector('.description-cancel-btn')
+let confirmDescriptionBtn = document.querySelector('.description-confirm-btn')
+let user = document.querySelector('select')
+let flag = true;
+
+//модальное окно "Warning!"
+let windowWarning = document.querySelector('.window-warning') 
+let cancelWarningBtn = document.querySelector('.warning-cancel-btn')
+let confirmWarningBtn = document.querySelector('.warning-confirm-btn')
+let warningText = document.querySelector('.warning__text')
+
+//затемнение фона
+let backdrop = document.querySelector('.backdrop')
 function backdropOn() {
     backdrop.style.left = '0'
     backdrop.style.opacity = '1'
