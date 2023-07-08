@@ -87,15 +87,19 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                     border: $list-done-border-color;    
                 }
                 .list__content {
-                    min-height: 340px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    padding: 15px;
+                    gap: 15px;
+                    min-height: 345px;
                     width: 100%;
                     .card {
                         display: flex;
                         justify-content: space-around;
                         flex-direction: column;
-                        max-width: 90%;
+                        max-width: 100%;
                         min-height: 150px;
-                        margin: 1.4rem auto;
                         border-radius: 15px;
                         background-color: azure;
                         .card__item {
@@ -136,7 +140,8 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                     }
                 }
                 .list-progress__content {
-                    min-height: 390px;
+                    min-height: 395px;
+                    padding-bottom: 65px;
                 }
                 .list__footer {
                     width: 100%;
@@ -173,6 +178,9 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                         box-shadow: $list-done-background-color-active;
                     }
                 }
+            }
+            .list-progress {
+                border-radius: 50px;
             }
         }
     }
