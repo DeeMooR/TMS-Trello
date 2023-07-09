@@ -29,13 +29,20 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
         border-radius: 2.1rem;
         background-color: rgb(216, 184, 246);
         border: 1px solid rgb(189, 121, 253);
+        @media (max-width: 400px) {
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
         .logo-trello {
             font-size: 2.5rem;
             margin: 1.4rem;
         }
         .search-clock {
             display: flex;
-            justify-content: space-between;            
+            justify-content: space-between;  
+            @media (max-width: 400px) {
+                justify-content: space-evenly;
+            }          
             .search-todo {
                 width: 60%;
                 border: 1px solid gray;
@@ -57,6 +64,9 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                 border: 1px solid gray;
                 border-radius: 5px;
                 background-color: white;
+                @media (max-width: 400px) {
+                    margin-right: 0;
+                }
             }
         }
     }
