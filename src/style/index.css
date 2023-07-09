@@ -18,18 +18,31 @@
   background-color: rgb(216, 184, 246);
   border: 1px solid rgb(189, 121, 253);
 }
-.wrapper .header div {
-  margin: 1.4rem;
-}
 .wrapper .header .logo-trello {
   font-size: 2.5rem;
+  margin: 1.4rem;
 }
-.wrapper .header .clock {
+.wrapper .header .search-clock {
+  display: flex;
+  justify-content: space-between;
+}
+.wrapper .header .search-clock .search-todo {
+  width: 60%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: white;
+  text-align: center;
+}
+.wrapper .header .search-clock input[type=search]::-webkit-search-cancel-button {
+  display: none;
+}
+.wrapper .header .search-clock .clock {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 1.4rem;
   font-size: 1.7rem;
-  width: 10%;
+  width: 30%;
   height: 40px;
   border: 1px solid gray;
   border-radius: 5px;

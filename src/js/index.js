@@ -90,6 +90,9 @@ let todos = []
 function createCard() {   
     let card = document.createElement('div')
     card.classList.add('list-add__card', 'card')
+    card.setAttribute('id', 'draggable')
+    card.draggable = true
+    card.setAttribute('ondragstart', 'onDragStart(event);')
 
     let cardItemTitle = document.createElement('div')
     cardItemTitle.setAttribute('class', 'card__item')
@@ -267,6 +270,9 @@ function getName() {
         let cardNew = document.createElement('div')
         cardNew.classList.add('list-add__card', 'card')
         cardNew[index]
+        cardNew.setAttribute('id', 'draggable')
+        cardNew.draggable = true
+        cardNew.setAttribute('ondragstart', 'onDragStart(event);')
     
         let cardItemTitle = document.createElement('div')
         cardItemTitle.setAttribute('class', 'card__item')
@@ -662,3 +668,25 @@ function search() {
 }
 
 if (localStorage.getItem('todos')) getName()
+
+function onDragStart(event) {
+    event
+      .dataTransfer
+      .setData('text/plain', event.target.id);
+}
+function onDragOver(event) {
+    event.preventDefault();
+}
+function onDrop(event) {
+    const id = event
+        .dataTransfer
+        .getData('text');
+
+    const draggableElement = document.getElementById(id);
+    const dropzone = event.target;
+    dropzone.appendChild(draggableElement);
+
+    event
+    .dataTransfer
+    .clearData();
+}
