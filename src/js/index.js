@@ -101,9 +101,11 @@ function createCard() {
     cardItemUser.setAttribute('class', 'card__item')
 
     let spanTitle = document.createElement('span')
+    spanTitle.classList.add('spanTitle')
     spanTitle.innerHTML = descriptionTitle.value
 
     let divButtons = document.createElement('div')
+    divButtons.classList.add('divButtons')
 
     let editBtn = document.createElement('button')
     editBtn.setAttribute('type', 'button')
@@ -115,6 +117,7 @@ function createCard() {
     deleteBtn.innerHTML = 'DELETE'
 
     let spanDescription = document.createElement('span')
+    spanDescription.classList.add('spanDescription')
     spanDescription.innerHTML = descriptionText.value
 
     let applyBtn = document.createElement('button')
@@ -167,7 +170,7 @@ function createCard() {
             user.value = spanUser.innerHTML
             flag = false
             let confirmDescriptionBtnEvent = (event) => {
-                if (event.target === confirmDescriptionBtn) {
+                if (event.target === confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
                     console.log(event.target);
                     if(todos[index].id) {
                         windowDescription.style.display = 'none';
@@ -275,9 +278,12 @@ function getName() {
         cardItemUser.setAttribute('class', 'card__item')
     
         let spanTitle = document.createElement('span')
+        spanTitle.classList.add('spanTitle')
         spanTitle.innerHTML = array[index].title
     
         let divButtons = document.createElement('div')
+        divButtons.classList.add('divButtons')
+
     
         let editBtn = document.createElement('button')
         editBtn.setAttribute('type', 'button')
@@ -289,6 +295,7 @@ function getName() {
         deleteBtn.innerHTML = 'DELETE'
     
         let spanDescription = document.createElement('span')
+        spanDescription.classList.add('spanDescription')
         spanDescription.innerHTML = array[index].text
     
         let applyBtn = document.createElement('button')
@@ -369,7 +376,7 @@ function getName() {
                 user.value = spanUser.innerHTML
                 flag = false
                 let confirmDescriptionBtnEvent = (event) => {
-                    if (event.target === confirmDescriptionBtn) {
+                    if (event.target === confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
                         console.log(event.target);
                         if(item.id) {
                             windowDescription.style.display = 'none';
