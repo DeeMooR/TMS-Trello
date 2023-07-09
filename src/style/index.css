@@ -3,6 +3,7 @@
 .wrapper {
   font-family: Raleway;
   min-width: 0;
+  width: 100vw;
   overflow-x: hidden;
   padding: 0 1rem;
 }
