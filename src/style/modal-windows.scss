@@ -160,7 +160,10 @@ $text-background: white;
     @media (max-width: 400px) {
         width: 95%;
     }
-
+    .warning__text {
+        line-height: 1.5;
+        padding: 0 30px;
+    }
     .warning__buttons {
         display: flex;
         justify-content: space-evenly;

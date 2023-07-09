@@ -208,8 +208,8 @@ function createCard() {
             } else {
                 windowWarning.style.display = 'flex'
                 warningText.innerHTML = 'Сначала нужно выполнить текущие дела'
-                confirmWarningBtn.remove()
                 backdropOn()
+                confirmWarningBtn.hidden = true
             }
         }
         if (event.target == deleteBtn) {
@@ -409,9 +409,9 @@ function getName() {
                     listProgress.append(cardNew) 
                 } else {
                     windowWarning.style.display = 'flex'
-                    warningText.innerHTML = 'Сначала нужно выполнить текущие дела'
-                    confirmWarningBtn.remove()
+                    warningText.innerHTML = 'Сначала нужно выполнить текущие дела!'
                     backdropOn()
+                    confirmWarningBtn.hidden = true
                 }
             }
             if (event.target == deleteBtn) {
@@ -502,22 +502,29 @@ document.addEventListener('click', ({target}) => {
         descriptionTitle.value = '123'
         descriptionText.value = '123'
     }
-    // удаление выполненных карточек
+    // удаление всех выполненных карточек
     if (target == deleteAllBtn) {
-        warningText.innerHTML = 'Вы уверены, что хотите удалить все выполненные карточки?'
+        if (listDoneCounter.innerHTML > 0) {
+            warningText.innerHTML = 'Вы уверены, что хотите удалить все выполненные карточки?'
+        } else {
+            warningText.innerHTML = 'Список пуст'
+            confirmWarningBtn.hidden = true
+        }
         windowWarning.style.display = 'flex'
         backdropOn()
     }
-})
-
-// клик в модальном окне Description
-document.addEventListener('click', (event) => {
-    if (event.target == cancelDescriptionBtn) {
+    // закрыть модальное окно Description
+    if (target == cancelDescriptionBtn) {
         windowDescription.style.display = 'none'
         backdropOff()
         flag = true
     }
-    if (event.target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
+    // подтвердить добавление новой карточки в Description
+    if (target == confirmDescriptionBtn 
+        && descriptionTitle.value.trim() !== '' 
+        && descriptionText.value.trim() !== '' 
+        && user.value !== '') {
+
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
@@ -525,16 +532,15 @@ document.addEventListener('click', (event) => {
             createCard()
         }
     }
-})
-
-// клик в модальном окне Warning
-document.addEventListener('click', ({target}) => {
+    // закрыть модальное окно Warning
     if (target == cancelWarningBtn) {
         windowWarning.style.display = 'none'
+        warningText.innerHTML = ''
         backdropOff()
+        confirmWarningBtn.hidden = false
     }
+    // подтвердить удаление всех карточек в листе "Done"
     if (target == confirmWarningBtn) {
-        //удаление всех карточек
         listDoneContent.innerHTML = ''
         listDoneCounter.innerHTML = 0;
 
