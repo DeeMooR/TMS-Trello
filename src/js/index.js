@@ -174,11 +174,14 @@ function createCard() {
                         backdropOff();
                         todos[index].title = descriptionTitle.value;
                         todos[index].text = descriptionText.value;
+                        todos[index].user = user.value;
                         todo.title = todos[index].title;
                         todo.text = todos[index].text;
+                        todo.user = todos[index].user;
                         setName();
                         spanTitle.innerHTML = descriptionTitle.value;
                         spanDescription.innerHTML = descriptionText.value;
+                        spanUser.innerHTML = user.value;
                         flag = true;
                     }
                     document.removeEventListener('click', confirmDescriptionBtnEvent);
@@ -373,11 +376,14 @@ function getName() {
                             backdropOff();
                             array[index].title = descriptionTitle.value;
                             array[index].text = descriptionText.value;
+                            array[index].user = user.value;
                             todoNew.title = array[index].title;
                             todoNew.text = array[index].text;
+                            todoNew.user = array[index].user;
                             setName();
                             spanTitle.innerHTML = descriptionTitle.value;
                             spanDescription.innerHTML = descriptionText.value;
+                            spanUser.innerHTML = user.value;
                             flag = true;
                         }
                         document.removeEventListener('click', confirmDescriptionBtnEvent);
@@ -465,6 +471,7 @@ let deleteAllBtn = document.querySelector('.delete-all-btn')
 let windowDescription = document.querySelector('.window-description') 
 let descriptionTitle = document.querySelector('.description__title')
 let descriptionText = document.querySelector('.description__text')
+let descriptionUsers = document.querySelector('.description__users')
 let cancelDescriptionBtn = document.querySelector('.description-cancel-btn')
 let confirmDescriptionBtn = document.querySelector('.description-confirm-btn')
 let user = document.querySelector('select')
