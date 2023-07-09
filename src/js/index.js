@@ -136,27 +136,61 @@ function createCard() {
     card.append(cardItemTitle, cardItemDescription, cardItemUser)
     listContent.append(card)
 
-    document.addEventListener('click', ({target}) => {
-        if (target == editBtn) {
+    let backBtn = document.createElement('button')
+    backBtn.classList.add('card-item__btn', 'back-btn')
+    backBtn.innerHTML = 'BACK'
+        
+    let comleteBtn = document.createElement('button')
+    comleteBtn.classList.add('card-item__btn', 'comlete-btn')
+    comleteBtn.innerHTML = 'COMPLETE'
+
+    const todo = {}
+    todo.id = Date.now()
+    todo.user = spanUser.innerHTML
+    todo.title = spanTitle.innerHTML
+    todo.text = spanDescription.innerHTML
+    todo.time = divDate.innerHTML
+    todo.status = 'Task'
+
+    todos.push(todo)
+    console.log(todos);
+
+    document.addEventListener('click', (event) => {
+        if (event.target == editBtn) {
+            let todoCell = event.target.closest('.list-add__card');
+            let index = Array.from(todoCell.parentElement.children).indexOf(todoCell);
+            console.log(event.target);
             windowDescription.style.display = 'flex'
             backdropOn()
             descriptionText.value = spanDescription.innerHTML
             descriptionTitle.value = spanTitle.innerHTML
             user.value = spanUser.innerHTML
             flag = false
+            let confirmDescriptionBtnEvent = (event) => {
+                if (event.target === confirmDescriptionBtn) {
+                    console.log(event.target);
+                    if(todos[index].id) {
+                        windowDescription.style.display = 'none';
+                        backdropOff();
+                        todos[index].title = descriptionTitle.value;
+                        todos[index].text = descriptionText.value;
+                        todos[index].user = user.value;
+                        todo.title = todos[index].title;
+                        todo.text = todos[index].text;
+                        todo.user = todos[index].user;
+                        setName();
+                        spanTitle.innerHTML = descriptionTitle.value;
+                        spanDescription.innerHTML = descriptionText.value;
+                        spanUser.innerHTML = user.value;
+                        flag = true;
+                    }
+                    document.removeEventListener('click', confirmDescriptionBtnEvent);
+                }
+            }
+            document.addEventListener('click', confirmDescriptionBtnEvent);
         }
-        if (target == confirmDescriptionBtn) {
-            // так применяется ко всем сразу            
-                // spanTitle.innerHTML = descriptionTitle.value
-                // spanDescription.innerHTML = descriptionText.value
 
-            // а так не работае кнопка edit
-                card.spanTitle = descriptionTitle.value
-                card.spanDescription = descriptionText.value
-
-            flag = true
-        }        
-        if (target == applyBtn) {
+        if (event.target == applyBtn) {
 
             if (listProgressCounter.innerHTML < 6) {
                 listAddCounter.innerHTML = --listAddCounter.innerHTML;
@@ -178,7 +212,7 @@ function createCard() {
                 backdropOn()
             }
         }
-        if (target == deleteBtn) {
+        if (event.target == deleteBtn) {
             if (deleteBtn.closest('.list-add')) {
                 listAddCounter.innerHTML = --listAddCounter.innerHTML;
             }
@@ -189,7 +223,7 @@ function createCard() {
             todos.splice(todos.indexOf(todo), 1)
             setName()
         }
-        if (target == backBtn) {
+        if (event.target == backBtn) {
             listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
             listAddCounter.innerHTML = ++listAddCounter.innerHTML;
             card.style.backgroundColor = 'rgb(152, 223, 138)'
@@ -202,7 +236,7 @@ function createCard() {
             todo.status = 'Task'
             setName()
         }
-        if (target == comleteBtn) {
+        if (event.target == comleteBtn) {
             listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
             listDoneCounter.innerHTML = ++listDoneCounter.innerHTML;
             card.style.backgroundColor = 'rgb(135, 206, 250)'            
@@ -215,24 +249,7 @@ function createCard() {
             setName()
         }
     })
-
-    let backBtn = document.createElement('button')
-    backBtn.classList.add('card-item__btn', 'back-btn')
-    backBtn.innerHTML = 'BACK'
-        
-    let comleteBtn = document.createElement('button')
-    comleteBtn.classList.add('card-item__btn', 'comlete-btn')
-    comleteBtn.innerHTML = 'COMPLETE'
-
-    const todo = {}
-    todo.id = userName.indexOf(user.value)
-    todo.user = spanUser.innerHTML
-    todo.title = spanTitle.innerHTML
-    todo.text = spanDescription.innerHTML
-    todo.time = divDate.innerHTML
-    todo.status = 'Task'
-
-    todos.push(todo)
+    
     setName()
 }
 
@@ -243,10 +260,10 @@ function setName() {
 function getName() {
     let array = JSON.parse(localStorage.getItem('todos'))
     
-    for (let i = 0; i < array.length; i++) {
+    array.forEach(function(item,index) {
         let cardNew = document.createElement('div')
         cardNew.classList.add('list-add__card', 'card')
-        cardNew[i]
+        cardNew[index]
     
         let cardItemTitle = document.createElement('div')
         cardItemTitle.setAttribute('class', 'card__item')
@@ -258,7 +275,7 @@ function getName() {
         cardItemUser.setAttribute('class', 'card__item')
     
         let spanTitle = document.createElement('span')
-        spanTitle.innerHTML = array[i].title
+        spanTitle.innerHTML = array[index].title
     
         let divButtons = document.createElement('div')
     
@@ -272,18 +289,18 @@ function getName() {
         deleteBtn.innerHTML = 'DELETE'
     
         let spanDescription = document.createElement('span')
-        spanDescription.innerHTML = array[i].text
+        spanDescription.innerHTML = array[index].text
     
         let applyBtn = document.createElement('button')
         applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
         applyBtn.innerHTML = '>'
     
         let spanUser = document.createElement('span')
-        spanUser.innerHTML = array[i].user
+        spanUser.innerHTML = array[index].user
     
         let divDate = document.createElement('div')
         divDate.setAttribute('class', 'date')
-        divDate.innerHTML = array[i].time
+        divDate.innerHTML = array[index].time
     
         let backBtn = document.createElement('button')
         backBtn.classList.add('card-item__btn', 'back-btn')
@@ -300,8 +317,8 @@ function getName() {
     
         cardNew.append(cardItemTitle, cardItemDescription, cardItemUser)
 
-        if (array[i].status === 'Task') listContent.append(cardNew)
-        if (array[i].status === 'In progress') {
+        if (array[index].status === 'Task') listContent.append(cardNew)
+        if (array[index].status === 'In progress') {
             cardNew.style.backgroundColor = 'rgb(240, 240, 255)'
             applyBtn.remove()
             editBtn.remove()
@@ -309,7 +326,7 @@ function getName() {
             divButtons.append(backBtn, comleteBtn)
             listProgress.append(cardNew)
         }
-        if (array[i].status === 'Done') {
+        if (array[index].status === 'Done') {
             cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
             backBtn.remove()
             comleteBtn.remove()
@@ -332,36 +349,50 @@ function getName() {
         } 
     
         const todoNew = {}
-        todoNew.id = array[i].id
-        todoNew.user = array[i].user
-        todoNew.title = array[i].title
-        todoNew.text = array[i].text
-        todoNew.time = array[i].time
-        todoNew.status = array[i].status
+        // console.log(array[index].id);
+        todoNew.id = array[index].id
+        todoNew.user = array[index].user
+        todoNew.title = array[index].title
+        todoNew.text = array[index].text
+        todoNew.time = array[index].time
+        todoNew.status = array[index].status
 
         todos.push(todoNew)
 
-        document.addEventListener('click', ({target}) => {
-            if (target == editBtn) {
+        document.addEventListener('click', (event) => {
+            if (event.target == editBtn) {
+                console.log(event.target);
                 windowDescription.style.display = 'flex'
                 backdropOn()
                 descriptionText.value = spanDescription.innerHTML
                 descriptionTitle.value = spanTitle.innerHTML
                 user.value = spanUser.innerHTML
                 flag = false
+                let confirmDescriptionBtnEvent = (event) => {
+                    if (event.target === confirmDescriptionBtn) {
+                        console.log(event.target);
+                        if(item.id) {
+                            windowDescription.style.display = 'none';
+                            backdropOff();
+                            array[index].title = descriptionTitle.value;
+                            array[index].text = descriptionText.value;
+                            array[index].user = user.value;
+                            todoNew.title = array[index].title;
+                            todoNew.text = array[index].text;
+                            todoNew.user = array[index].user;
+                            setName();
+                            spanTitle.innerHTML = descriptionTitle.value;
+                            spanDescription.innerHTML = descriptionText.value;
+                            spanUser.innerHTML = user.value;
+                            flag = true;
+                        }
+                        document.removeEventListener('click', confirmDescriptionBtnEvent);
+                    }
+                }
+                document.addEventListener('click', confirmDescriptionBtnEvent);
             }
-            if (target == confirmDescriptionBtn) {
-                // так применяется ко всем сразу            
-                    // spanTitle.innerHTML = descriptionTitle.value
-                    // spanDescription.innerHTML = descriptionText.value
-    
-                // а так не работае кнопка edit
-                    cardNew.spanTitle = descriptionTitle.value
-                    cardNew.spanDescription = descriptionText.value
-    
-                flag = true
-            }        
-            if (target == applyBtn) {
+  
+            if (event.target == applyBtn) {
 
                 if (listProgressCounter.innerHTML < 6) {
                     listAddCounter.innerHTML = --listAddCounter.innerHTML;
@@ -383,7 +414,7 @@ function getName() {
                     backdropOn()
                 }
             }
-            if (target == deleteBtn) {
+            if (event.target == deleteBtn) {
                 if (deleteBtn.closest('.list-add')) {
                     listAddCounter.innerHTML = --listAddCounter.innerHTML;
                 }
@@ -394,7 +425,7 @@ function getName() {
                 todos.splice(todos.indexOf(todoNew), 1)
                 setName()
             }
-            if (target == backBtn) {
+            if (event.target == backBtn) {
                 listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
                 listAddCounter.innerHTML = ++listAddCounter.innerHTML;
                 cardNew.style.backgroundColor = 'rgb(152, 223, 138)'
@@ -407,7 +438,7 @@ function getName() {
                 todoNew.status = 'Task'
                 setName()
             }
-            if (target == comleteBtn) {
+            if (event.target == comleteBtn) {
                 listProgressCounter.innerHTML = --listProgressCounter.innerHTML;
                 listDoneCounter.innerHTML = ++listDoneCounter.innerHTML;
                 cardNew.style.backgroundColor = 'rgb(135, 206, 250)'            
@@ -420,7 +451,7 @@ function getName() {
                 setName()
             }
         })    
-    }
+    })
 }
 
 //карточка "Task"
@@ -465,6 +496,7 @@ function backdropOff() {
 document.addEventListener('click', ({target}) => {
     // добавление новой карточки
     if (target == addContentBtn) {
+        confirmDescriptionBtn.classList.add('description-confirm-btn')
         windowDescription.style.display = 'flex'
         backdropOn()
         descriptionTitle.value = '123'
@@ -479,13 +511,13 @@ document.addEventListener('click', ({target}) => {
 })
 
 // клик в модальном окне Description
-document.addEventListener('click', ({target}) => {
-    if (target == cancelDescriptionBtn) {
+document.addEventListener('click', (event) => {
+    if (event.target == cancelDescriptionBtn) {
         windowDescription.style.display = 'none'
         backdropOff()
         flag = true
     }
-    if (target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
+    if (event.target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
