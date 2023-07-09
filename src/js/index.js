@@ -101,6 +101,7 @@ function createCard() {
     cardItemUser.setAttribute('class', 'card__item')
 
     let spanTitle = document.createElement('span')
+    spanTitle.classList.add('title')
     spanTitle.innerHTML = descriptionTitle.value
 
     let divButtons = document.createElement('div')
@@ -115,6 +116,7 @@ function createCard() {
     deleteBtn.innerHTML = 'DELETE'
 
     let spanDescription = document.createElement('span')
+    spanDescription.classList.add('text')
     spanDescription.innerHTML = descriptionText.value
 
     let applyBtn = document.createElement('button')
@@ -122,6 +124,7 @@ function createCard() {
     applyBtn.innerHTML = '>'
 
     let spanUser = document.createElement('span')
+    spanUser.classList.add('name')
     spanUser.innerHTML = user.value
 
     let divDate = document.createElement('div')
@@ -275,6 +278,7 @@ function getName() {
         cardItemUser.setAttribute('class', 'card__item')
     
         let spanTitle = document.createElement('span')
+        spanTitle.classList.add('title')
         spanTitle.innerHTML = array[index].title
     
         let divButtons = document.createElement('div')
@@ -289,6 +293,7 @@ function getName() {
         deleteBtn.innerHTML = 'DELETE'
     
         let spanDescription = document.createElement('span')
+        spanDescription.classList.add('text')
         spanDescription.innerHTML = array[index].text
     
         let applyBtn = document.createElement('button')
@@ -296,6 +301,7 @@ function getName() {
         applyBtn.innerHTML = '>'
     
         let spanUser = document.createElement('span')
+        spanUser.classList.add('name')
         spanUser.innerHTML = array[index].user
     
         let divDate = document.createElement('div')
@@ -551,6 +557,9 @@ document.addEventListener('click', ({target}) => {
         windowWarning.style.display = 'none'
         backdropOff()
     }
+    if (target == inputSearch) {
+        document.addEventListener('keyup', search);
+    }
 })
 
 let clock = document.querySelector('.clock')
@@ -588,6 +597,68 @@ for (let i = 0; i < userName.length; i++) {//добваление имен из 
     newOption.classList.add(`user__${[i]}`);
     newOption.innerHTML = userName[i];
     user.appendChild(newOption);
+}
+
+let inputSearch = document.querySelector('.search-todo')
+
+function search() {
+    let filter = inputSearch.value.toUpperCase();
+
+    if (filter.length > 0) {
+        for (let i = 0; i < listContent.children.length; i++) {
+            let title = listContent.children[i].querySelector(".title");
+            let text = listContent.children[i].querySelector(".text");
+            let name = listContent.children[i].querySelector(".name");
+
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1
+                || text.innerHTML.toUpperCase().indexOf(filter) > -1
+                || name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+
+                listContent.children[i].style.display = "";
+            } else {
+                listContent.children[i].style.display = "none";
+            }
+        }
+        for (let i = 0; i < listProgress.children.length; i++) {
+            let title = listProgress.children[i].querySelector(".title");
+            let text = listProgress.children[i].querySelector(".text");
+            let name = listProgress.children[i].querySelector(".name");
+
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1
+                || text.innerHTML.toUpperCase().indexOf(filter) > -1
+                || name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    
+                listProgress.children[i].style.display = "";
+            } else {
+                listProgress.children[i].style.display = "none";
+            }
+        }
+        for (let i = 0; i < listDoneContent.children.length; i++) {
+            let title = listDoneContent.children[i].querySelector(".title");
+            let text = listDoneContent.children[i].querySelector(".text");
+            let name = listDoneContent.children[i].querySelector(".name");
+
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1
+                || text.innerHTML.toUpperCase().indexOf(filter) > -1
+                || name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    
+                listDoneContent.children[i].style.display = "";
+            } else {
+                listDoneContent.children[i].style.display = "none";
+            }
+        }
+
+    } else if (filter.length === 0) {        
+        for (let child of listContent.children) {
+            child.style.display = 'flex'
+        }
+        for (let child of listProgress.children) {
+            child.style.display = 'flex'
+        }
+        for (let child of listDoneContent.children) {
+            child.style.display = 'flex'
+        }
+    }
 }
 
 if (localStorage.getItem('todos')) getName()
