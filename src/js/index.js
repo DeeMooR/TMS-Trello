@@ -90,6 +90,9 @@ let todos = []
 function createCard() {   
     let card = document.createElement('div')
     card.classList.add('list-add__card', 'card')
+    card.setAttribute('id', 'draggable')
+    card.draggable = true
+    card.setAttribute('ondragstart', 'onDragStart(event);')
 
     let cardItemTitle = document.createElement('div')
     cardItemTitle.setAttribute('class', 'card__item')
@@ -101,6 +104,7 @@ function createCard() {
     cardItemUser.setAttribute('class', 'card__item')
 
     let spanTitle = document.createElement('span')
+    spanTitle.classList.add('title')
     spanTitle.innerHTML = descriptionTitle.value
 
     let divButtons = document.createElement('div')
@@ -115,6 +119,7 @@ function createCard() {
     deleteBtn.innerHTML = 'DELETE'
 
     let spanDescription = document.createElement('span')
+    spanDescription.classList.add('text')
     spanDescription.innerHTML = descriptionText.value
 
     let applyBtn = document.createElement('button')
@@ -122,6 +127,7 @@ function createCard() {
     applyBtn.innerHTML = '>'
 
     let spanUser = document.createElement('span')
+    spanUser.classList.add('name')
     spanUser.innerHTML = user.value
 
     let divDate = document.createElement('div')
@@ -208,8 +214,8 @@ function createCard() {
             } else {
                 windowWarning.style.display = 'flex'
                 warningText.innerHTML = 'Сначала нужно выполнить текущие дела'
-                confirmWarningBtn.remove()
                 backdropOn()
+                confirmWarningBtn.hidden = true
             }
         }
         if (event.target == deleteBtn) {
@@ -264,6 +270,9 @@ function getName() {
         let cardNew = document.createElement('div')
         cardNew.classList.add('list-add__card', 'card')
         cardNew[index]
+        cardNew.setAttribute('id', 'draggable')
+        cardNew.draggable = true
+        cardNew.setAttribute('ondragstart', 'onDragStart(event);')
     
         let cardItemTitle = document.createElement('div')
         cardItemTitle.setAttribute('class', 'card__item')
@@ -275,6 +284,7 @@ function getName() {
         cardItemUser.setAttribute('class', 'card__item')
     
         let spanTitle = document.createElement('span')
+        spanTitle.classList.add('title')
         spanTitle.innerHTML = array[index].title
     
         let divButtons = document.createElement('div')
@@ -289,6 +299,7 @@ function getName() {
         deleteBtn.innerHTML = 'DELETE'
     
         let spanDescription = document.createElement('span')
+        spanDescription.classList.add('text')
         spanDescription.innerHTML = array[index].text
     
         let applyBtn = document.createElement('button')
@@ -296,6 +307,7 @@ function getName() {
         applyBtn.innerHTML = '>'
     
         let spanUser = document.createElement('span')
+        spanUser.classList.add('name')
         spanUser.innerHTML = array[index].user
     
         let divDate = document.createElement('div')
@@ -409,9 +421,9 @@ function getName() {
                     listProgress.append(cardNew) 
                 } else {
                     windowWarning.style.display = 'flex'
-                    warningText.innerHTML = 'Сначала нужно выполнить текущие дела'
-                    confirmWarningBtn.remove()
+                    warningText.innerHTML = 'Сначала нужно выполнить текущие дела!'
                     backdropOn()
+                    confirmWarningBtn.hidden = true
                 }
             }
             if (event.target == deleteBtn) {
@@ -502,22 +514,29 @@ document.addEventListener('click', ({target}) => {
         descriptionTitle.value = '123'
         descriptionText.value = '123'
     }
-    // удаление выполненных карточек
+    // удаление всех выполненных карточек
     if (target == deleteAllBtn) {
-        warningText.innerHTML = 'Вы уверены, что хотите удалить все выполненные карточки?'
+        if (listDoneCounter.innerHTML > 0) {
+            warningText.innerHTML = 'Вы уверены, что хотите удалить все выполненные карточки?'
+        } else {
+            warningText.innerHTML = 'Список пуст'
+            confirmWarningBtn.hidden = true
+        }
         windowWarning.style.display = 'flex'
         backdropOn()
     }
-})
-
-// клик в модальном окне Description
-document.addEventListener('click', (event) => {
-    if (event.target == cancelDescriptionBtn) {
+    // закрыть модальное окно Description
+    if (target == cancelDescriptionBtn) {
         windowDescription.style.display = 'none'
         backdropOff()
         flag = true
     }
-    if (event.target == confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
+    // подтвердить добавление новой карточки в Description
+    if (target == confirmDescriptionBtn 
+        && descriptionTitle.value.trim() !== '' 
+        && descriptionText.value.trim() !== '' 
+        && user.value !== '') {
+
         windowDescription.style.display = 'none'
         backdropOff()
         if (flag == true) {
@@ -525,16 +544,15 @@ document.addEventListener('click', (event) => {
             createCard()
         }
     }
-})
-
-// клик в модальном окне Warning
-document.addEventListener('click', ({target}) => {
+    // закрыть модальное окно Warning
     if (target == cancelWarningBtn) {
         windowWarning.style.display = 'none'
+        warningText.innerHTML = ''
         backdropOff()
+        confirmWarningBtn.hidden = false
     }
+    // подтвердить удаление всех карточек в листе "Done"
     if (target == confirmWarningBtn) {
-        //удаление всех карточек
         listDoneContent.innerHTML = ''
         listDoneCounter.innerHTML = 0;
 
@@ -544,6 +562,9 @@ document.addEventListener('click', ({target}) => {
 
         windowWarning.style.display = 'none'
         backdropOff()
+    }
+    if (target == inputSearch) {
+        document.addEventListener('keyup', search);
     }
 })
 
@@ -584,4 +605,88 @@ for (let i = 0; i < userName.length; i++) {//добваление имен из 
     user.appendChild(newOption);
 }
 
+let inputSearch = document.querySelector('.search-todo')
+
+function search() {
+    let filter = inputSearch.value.toUpperCase();
+
+    if (filter.length > 0) {
+        for (let i = 0; i < listContent.children.length; i++) {
+            let title = listContent.children[i].querySelector(".title");
+            let text = listContent.children[i].querySelector(".text");
+            let name = listContent.children[i].querySelector(".name");
+
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1
+                || text.innerHTML.toUpperCase().indexOf(filter) > -1
+                || name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+
+                listContent.children[i].style.display = "";
+            } else {
+                listContent.children[i].style.display = "none";
+            }
+        }
+        for (let i = 0; i < listProgress.children.length; i++) {
+            let title = listProgress.children[i].querySelector(".title");
+            let text = listProgress.children[i].querySelector(".text");
+            let name = listProgress.children[i].querySelector(".name");
+
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1
+                || text.innerHTML.toUpperCase().indexOf(filter) > -1
+                || name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    
+                listProgress.children[i].style.display = "";
+            } else {
+                listProgress.children[i].style.display = "none";
+            }
+        }
+        for (let i = 0; i < listDoneContent.children.length; i++) {
+            let title = listDoneContent.children[i].querySelector(".title");
+            let text = listDoneContent.children[i].querySelector(".text");
+            let name = listDoneContent.children[i].querySelector(".name");
+
+            if (title.innerHTML.toUpperCase().indexOf(filter) > -1
+                || text.innerHTML.toUpperCase().indexOf(filter) > -1
+                || name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    
+                listDoneContent.children[i].style.display = "";
+            } else {
+                listDoneContent.children[i].style.display = "none";
+            }
+        }
+
+    } else if (filter.length === 0) {        
+        for (let child of listContent.children) {
+            child.style.display = 'flex'
+        }
+        for (let child of listProgress.children) {
+            child.style.display = 'flex'
+        }
+        for (let child of listDoneContent.children) {
+            child.style.display = 'flex'
+        }
+    }
+}
+
 if (localStorage.getItem('todos')) getName()
+
+function onDragStart(event) {
+    event
+      .dataTransfer
+      .setData('text/plain', event.target.id);
+}
+function onDragOver(event) {
+    event.preventDefault();
+}
+function onDrop(event) {
+    const id = event
+        .dataTransfer
+        .getData('text');
+
+    const draggableElement = document.getElementById(id);
+    const dropzone = event.target;
+    dropzone.appendChild(draggableElement);
+
+    event
+    .dataTransfer
+    .clearData();
+}
