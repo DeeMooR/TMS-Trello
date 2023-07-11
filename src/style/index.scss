@@ -13,15 +13,12 @@ $list-done-background-color-hover: rgb(126, 191, 232);
 $list-done-background-color-active: 0px 0px 10px 0px rgb(88, 134, 163) inset;
 $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
 
-html {
-    background:linear-gradient(45deg, #ff9f1a, #70b500, #2ACCE5, #0079bf, #315989, #c377e0);
-}
-
 .wrapper {
     font-family: Raleway;
     min-width: 0;
     width: calc(100vw - 20px);
-    padding: 1rem;
+    overflow-x: hidden;
+    padding: 0 1rem;
     .header {
         display: flex;
         align-items: center;
@@ -29,24 +26,21 @@ html {
         max-width: 1170px;
         width: 100%;
         height: 150px;
-        margin: 0 auto;
-        margin-bottom: 1.4rem;
+        margin: 1.4rem auto;
         border-radius: 2.1rem;
+        background-color: rgb(216, 184, 246);
+        border: 1px solid rgb(189, 121, 253);
         @media (max-width: 400px) {
             flex-direction: column;
             justify-content: space-evenly;
         }
         .logo-trello {
+            font-size: 2.5rem;
             margin: 1.4rem;
-            width: 20%;
-            img {
-                width: 100%;
-            }
         }
         .search-clock {
             display: flex;
-            justify-content: space-evenly;
-            width: 50%;
+            justify-content: space-between;  
             @media (max-width: 400px) {
                 justify-content: space-evenly;
             }          
@@ -66,22 +60,18 @@ html {
                 justify-content: center;
                 margin-right: 1.4rem;
                 font-size: 1.7rem;
-                width: 25%;
+                width: 30%;
                 height: 40px;
                 border: 1px solid gray;
                 border-radius: 5px;
                 background-color: white;
-                &:hover {
-                    transform: scale(1.3);
-                    transition: .3s;
-                }
                 @media (max-width: 400px) {
                     margin-right: 0;
                 }
             }
         }
     }
-    .main {   
+    .main {
         .list-container {
             font-weight: 600;
             display: flex;
@@ -96,11 +86,7 @@ html {
                 max-width: 300px;
                 width: 100%;
                 border-radius: 10px;
-                &:hover {
-                    transform: scale(1.03);
-                    transition: .3s;
-                    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-                }
+                background-color: rgb(200,200, 200);
                 .list__header {
                     display: flex;
                     align-items: center;
@@ -127,7 +113,7 @@ html {
                 .list__content {
                     display: flex;
                     flex-direction: column;
-                    justify-content: flex-start;
+                    justify-content: space-between;
                     padding: 15px;
                     gap: 15px;
                     min-height: 345px;
@@ -175,13 +161,9 @@ html {
                                 font-size: 0.9rem;
                                 padding: 0.3rem;
                                 margin-left: 0.4rem;
-                                &:active {
-                                    box-shadow: $card-item-btn-box-shadow;
-                                }
-                                &:hover {
-                                    transform: scale(1.1);
-                                    transition: .3s;
-                                }
+                            }
+                            .card-item__btn:active {
+                                box-shadow: $card-item-btn-box-shadow;
                             }
                             .card-item__btn-apply {
                                 padding: 0.8rem 0.6rem;
@@ -206,7 +188,7 @@ html {
                 }
                 .list-progress__content {
                     min-height: 395px;
-                    padding-bottom: 10px;
+                    padding-bottom: 65px;
                 }
                 .list__footer {
                     width: 100%;
@@ -220,32 +202,32 @@ html {
                     }
                 }
                 .list-add__footer {
-                    button {  
+                    button {
                         background-color: $list-add-background-color;
                         border: $list-add-border-color;
-                        &:hover{
-                            background-color: $list-add-background-color-hover;
-                        }
-                        &:active {
-                            box-shadow: $list-add-background-color-active; 
-                        }    
+                    }
+                    button:hover{
+                        background-color: $list-add-background-color-hover;
+                    }
+                    button:active {
+                        box-shadow: $list-add-background-color-active; 
                     }
                 }
                 .list-done__footer {
                     button {
                         background-color: $list-done-background-color;
-                        border: $list-done-border-color;
-                        &:hover{
-                            background-color: $list-done-background-color-hover;
-                        }
-                        &:active {
-                            box-shadow: $list-done-background-color-active;
-                        }       
+                        border: $list-done-border-color;    
+                    }
+                    button:hover{
+                        background-color: $list-done-background-color-hover;
+                    }
+                    button:active {
+                        box-shadow: $list-done-background-color-active;
                     }
                 }
             }
             .list-progress {
-                border-radius: 10px;
+                border-radius: 50px;
             }
         }
     }
@@ -285,21 +267,14 @@ html {
         .header {
             margin: 1.4rem auto 5.5rem;
             width: 95%;
-            .logo-trello {
-                margin: 1.4rem;
-                width: 30%;
-                img {
-                    width: 100%;
-                }
-            }
-            .search-clock {
-                width: 60%;
+            .clock {
+                width: calc(10% + 2.5rem);
             }
         }
         .main {
             .list-container {
                 .list {
-                    max-width: 75%;
+                    max-width: 60%;
                     margin: 0 auto;
                     display: flex;
                     align-items: center;
@@ -323,8 +298,7 @@ html {
                     position: absolute;
                     bottom: calc(100% - 250px);
                     .swiper-pagination-bullet {
-                        background-color: inherit;
-                        color: white;
+                        background-color: white;
                         width: 9.8rem;
                         height: 2.85rem;
                         font-size: 1.4rem;
@@ -339,32 +313,6 @@ html {
 
 @media only screen and (max-width: 500px) {
     .wrapper {
-        .header {
-            .logo-trello {
-                margin: 1.4rem;
-                width: 40%;
-                img {
-                    width: 100%;
-                }
-            }
-            .search-clock {
-                flex-wrap: wrap;
-                flex-direction: column-reverse;
-                align-content: flex-end;
-                width: 60%;
-                height: 90%;
-                margin-right: 1.4rem;
-                .clock {
-                    margin: 0;
-                    align-self: flex-end;
-                    width: 50%;
-                }
-                .search-todo {
-                    width: 100%;
-                    height: 40px;
-                }
-            }
-        }
         .main {
             .list-container {
                 .list {

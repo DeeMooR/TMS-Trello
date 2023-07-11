@@ -13,12 +13,14 @@
         <input name="textfield" 
                type="text" 
                class="description__title" 
-               placeholder="Title">
+               placeholder="Title"
+               maxlength="18">
 
         <input name="textfield" 
                type="text" 
                class="description__text" 
-               placeholder="Description">
+               placeholder="Description"
+               maxlength="65">
 
         <div class="description__footer">
             <div class="description__selector">
@@ -44,10 +46,8 @@
     <div class="backdrop"></div>
 
     <div class="wrapper">
-        <header class="header matovoye-steklo">
-            <div class="logo-trello">
-                <img src="./img/Trello-logo.png" alt="">
-            </div>
+        <header class="header">
+            <div class="logo-trello">Trello</div>
             <div class="search-clock">
                 <input type="search" 
                        placeholder="Search todo" 
@@ -58,21 +58,21 @@
         
         <main class="main">
             <div class="list-container">
-                <div class="list-add list matovoye-steklo">
-                    <div class="list-add__header list__header sticky-top">
+                <div class="list-add list">
+                    <div class="list-add__header list__header">
                         TODO:<span class="list-add__header-number list__header-number">2</span>
                     </div>
                     <div class="list-add__content list__content"
                          ondragover="onDragOver(event);"
                          ondrop="onDrop(event);">
                     </div>
-                    <div class="list-add__footer list__footer sticky-bottom">
+                    <div class="list-add__footer list__footer">
                         <button type="button" class="list__btn add-btn">Add todo</button>
                     </div>
                 </div>
 
-                <div class="list-progress list matovoye-steklo">                     
-                    <div class="list-progress__header list__header sticky-top">
+                <div class="list-progress list">                     
+                    <div class="list-progress__header list__header">
                         IN PROGRESS:<span class="list-progress__header-number list__header-number">1</span>
                     </div>
                     <div class="list-progress__content list__content"
@@ -81,15 +81,15 @@
                     </div>
                 </div>
 
-                <div class="list-done list matovoye-steklo">
-                    <div class="list-done__header list__header sticky-top">
+                <div class="list-done list">
+                    <div class="list-done__header list__header">
                         DONE:<span class="list-done__header-number list__header-number">1</span>
                     </div>
                     <div class="list-done__content list__content"
                          ondragover="onDragOver(event);"
                          ondrop="onDrop(event);">
                     </div>
-                    <div class="list-done__footer list__footer sticky-bottom">
+                    <div class="list-done__footer list__footer">
                         <button type="button" class="list__btn delete-all-btn">Delete all</button>
                     </div>
                 </div>
@@ -99,8 +99,5 @@
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script type="module" src="./js/index.js"></script>
-    <script>
-        
-    </script>
 </body>
 </html>
