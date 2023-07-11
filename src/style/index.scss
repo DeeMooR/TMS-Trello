@@ -122,6 +122,7 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                         display: flex;
                         justify-content: space-around;
                         flex-direction: column;
+                        padding: 0.5rem 0;
                         max-width: 100%;
                         min-height: 150px;
                         border-radius: 15px;
@@ -132,6 +133,28 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                             justify-content: space-between;
                             margin: 0 1rem;
                             position: relative;
+                            .title {
+                                // spantitle
+                                display: inline-block;
+                                word-break: break-all;
+                                padding: 0.5rem 0;
+                                max-height: 49px;
+                                overflow: hidden;
+                            }
+                            .text {
+                                // spanDescription
+                                display: inline-block;
+                                width: auto;
+                                word-break: break-all;
+                                line-height: 1.2;
+                                padding: 0.5rem 0;
+                                max-height: 155px;
+                                overflow: hidden;
+                            }
+                            .divButtons {
+                                display: flex;
+                                align-items: flex-end;
+                            }
                             .card-item__btn {
                                 border: 1px solid black;
                                 border-radius: 5px;
@@ -145,7 +168,7 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                             .card-item__btn-apply {
                                 padding: 0.8rem 0.6rem;
                                 font-size: 1.2rem;
-                                position: absolute;
+                                // position: absolute;
                                 right: 0;
                             }
                         }
@@ -210,6 +233,34 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
     }
 }
 
+@media only screen and (max-width: 959px) {
+.wrapper {
+    .main {
+        .list-container {
+            .list {
+                .list__content {
+                    .card {
+                        .card__item {
+                            .title {
+                                max-height: 40px;
+                            }
+                            .text {
+                                font-size: 15px;
+                                max-height: 170px;
+                            }
+                            .divButtons {
+                                flex-direction: column;
+                                gap: 4px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+}
+
 @media only screen and (max-width: 768px) {
     .wrapper {
         padding: 0;
@@ -229,6 +280,19 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
                     align-items: center;
                     justify-content: center;
                     flex-direction: column;
+                    .list__content {
+                        .card {
+                            .card__item {
+                                .divButtons {
+                                    flex-direction: row;
+                                    gap: 0;
+                                }
+                                .text {
+                                    width: auto;
+                                }
+                            }
+                        }
+                    }
                 }
                 .swiper-pagination {
                     position: absolute;
@@ -253,6 +317,16 @@ $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
             .list-container {
                 .list {
                     max-width: 70%;
+                    .list__content {
+                        .card {
+                            .card__item {
+                                .divButtons {
+                                    flex-direction: column;
+                                    gap: 4px;
+                                }
+                            }
+                        }
+                    }
                 }
                 .swiper-pagination {
                     position: absolute;

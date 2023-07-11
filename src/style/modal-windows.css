@@ -92,7 +92,9 @@
   font-size: 14px;
   width: 130px;
   text-align: center;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   padding-right: 10px;
 }
 @media (max-width: 560px) {
@@ -185,4 +187,10 @@
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+@media only screen and (max-width: 981px) {
+  * {
+    font-size: 16px;
+  }
 }
