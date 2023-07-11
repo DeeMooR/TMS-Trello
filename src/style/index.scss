@@ -136,6 +136,7 @@ html {
                         display: flex;
                         justify-content: space-around;
                         flex-direction: column;
+                        padding: 0.5rem 0;
                         max-width: 100%;
                         min-height: 150px;
                         border-radius: 15px;
@@ -146,6 +147,28 @@ html {
                             justify-content: space-between;
                             margin: 0 1rem;
                             position: relative;
+                            .title {
+                                // spantitle
+                                display: inline-block;
+                                word-break: break-all;
+                                padding: 0.5rem 0;
+                                max-height: 49px;
+                                overflow: hidden;
+                            }
+                            .text {
+                                // spanDescription
+                                display: inline-block;
+                                width: auto;
+                                word-break: break-all;
+                                line-height: 1.2;
+                                padding: 0.5rem 0;
+                                max-height: 155px;
+                                overflow: hidden;
+                            }
+                            .divButtons {
+                                display: flex;
+                                align-items: flex-end;
+                            }
                             .card-item__btn {
                                 border: 1px solid black;
                                 border-radius: 5px;
@@ -163,7 +186,7 @@ html {
                             .card-item__btn-apply {
                                 padding: 0.8rem 0.6rem;
                                 font-size: 1.2rem;
-                                position: absolute;
+                                // position: absolute;
                                 right: 0;
                             }
                         }
@@ -228,36 +251,32 @@ html {
     }
 }
 
-.sticky-bottom {
-    position: -webkit-sticky;
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
+@media only screen and (max-width: 959px) {
+.wrapper {
+    .main {
+        .list-container {
+            .list {
+                .list__content {
+                    .card {
+                        .card__item {
+                            .title {
+                                max-height: 40px;
+                            }
+                            .text {
+                                font-size: 15px;
+                                max-height: 170px;
+                            }
+                            .divButtons {
+                                flex-direction: column;
+                                gap: 4px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-.sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-}
-.matovoye-steklo {
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 0 1rem 0 rgba(41, 39, 39, 0.2);
-    border-radius: 3px;
-    position: relative;
-    z-index: 1;
-    background: inherit;
-}  
-.matovoye-steklo:before {
-    content: "";
-    position: absolute;
-    background: inherit;
-    z-index: -1;
-    top: 0; bottom: 0;
-    left: 0; right: 0;
-    box-shadow: inset 0 0 2000px rgba(241, 241, 241, 0.5);
-    filter: blur(10px);
 }
 
 @media only screen and (max-width: 768px) {
@@ -286,6 +305,19 @@ html {
                     align-items: center;
                     justify-content: center;
                     flex-direction: column;
+                    .list__content {
+                        .card {
+                            .card__item {
+                                .divButtons {
+                                    flex-direction: row;
+                                    gap: 0;
+                                }
+                                .text {
+                                    width: auto;
+                                }
+                            }
+                        }
+                    }
                 }
                 .swiper-pagination {
                     position: absolute;
@@ -336,7 +368,17 @@ html {
         .main {
             .list-container {
                 .list {
-                    max-width: 85%;
+                    max-width: 70%;
+                    .list__content {
+                        .card {
+                            .card__item {
+                                .divButtons {
+                                    flex-direction: column;
+                                    gap: 4px;
+                                }
+                            }
+                        }
+                    }
                 }
                 .swiper-pagination {
                     position: absolute;

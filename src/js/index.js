@@ -108,6 +108,7 @@ function createCard() {
     spanTitle.innerHTML = descriptionTitle.value
 
     let divButtons = document.createElement('div')
+    divButtons.classList.add('divButtons')
 
     let editBtn = document.createElement('button')
     editBtn.setAttribute('type', 'button')
@@ -161,6 +162,17 @@ function createCard() {
     todos.push(todo)
     console.log(todos);
 
+    function textlow (element) {
+        var text = spanDescription.innerHTML;
+        if (text.length > 100) {
+        element.innerText = text.substring(0, 15) + "...";
+        } else {
+        element.innerText = text;
+        }
+    }
+
+    textlow (spanDescription)
+
     document.addEventListener('click', (event) => {
         if (event.target == editBtn) {
             let todoCell = event.target.closest('.list-add__card');
@@ -173,7 +185,7 @@ function createCard() {
             user.value = spanUser.innerHTML
             flag = false
             let confirmDescriptionBtnEvent = (event) => {
-                if (event.target === confirmDescriptionBtn) {
+                if (event.target === confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
                     console.log(event.target);
                     if(todos[index].id) {
                         windowDescription.style.display = 'none';
@@ -288,6 +300,8 @@ function getName() {
         spanTitle.innerHTML = array[index].title
     
         let divButtons = document.createElement('div')
+        divButtons.classList.add('divButtons')
+
     
         let editBtn = document.createElement('button')
         editBtn.setAttribute('type', 'button')
@@ -301,7 +315,7 @@ function getName() {
         let spanDescription = document.createElement('span')
         spanDescription.classList.add('text')
         spanDescription.innerHTML = array[index].text
-    
+        
         let applyBtn = document.createElement('button')
         applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
         applyBtn.innerHTML = '>'
@@ -381,7 +395,7 @@ function getName() {
                 user.value = spanUser.innerHTML
                 flag = false
                 let confirmDescriptionBtnEvent = (event) => {
-                    if (event.target === confirmDescriptionBtn) {
+                    if (event.target === confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
                         console.log(event.target);
                         if(item.id) {
                             windowDescription.style.display = 'none';

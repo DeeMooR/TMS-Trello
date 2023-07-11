@@ -132,6 +132,7 @@ html {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  padding: 0.5rem 0;
   max-width: 100%;
   min-height: 150px;
   border-radius: 15px;
@@ -143,6 +144,26 @@ html {
   justify-content: space-between;
   margin: 0 1rem;
   position: relative;
+}
+.wrapper .main .list-container .list .list__content .card .card__item .title {
+  display: inline-block;
+  word-break: break-all;
+  padding: 0.5rem 0;
+  max-height: 49px;
+  overflow: hidden;
+}
+.wrapper .main .list-container .list .list__content .card .card__item .text {
+  display: inline-block;
+  width: auto;
+  word-break: break-all;
+  line-height: 1.2;
+  padding: 0.5rem 0;
+  max-height: 155px;
+  overflow: hidden;
+}
+.wrapper .main .list-container .list .list__content .card .card__item .divButtons {
+  display: flex;
+  align-items: flex-end;
 }
 .wrapper .main .list-container .list .list__content .card .card__item .card-item__btn {
   border: 1px solid black;
@@ -161,7 +182,6 @@ html {
 .wrapper .main .list-container .list .list__content .card .card__item .card-item__btn-apply {
   padding: 0.8rem 0.6rem;
   font-size: 1.2rem;
-  position: absolute;
   right: 0;
 }
 .wrapper .main .list-container .list .list__content .list-add__card {
@@ -252,6 +272,19 @@ html {
   filter: blur(10px);
 }
 
+@media only screen and (max-width: 959px) {
+  .wrapper .main .list-container .list .list__content .card .card__item .title {
+    max-height: 40px;
+  }
+  .wrapper .main .list-container .list .list__content .card .card__item .text {
+    font-size: 15px;
+    max-height: 170px;
+  }
+  .wrapper .main .list-container .list .list__content .card .card__item .divButtons {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .wrapper {
     padding: 0;
@@ -277,6 +310,13 @@ html {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+  .wrapper .main .list-container .list .list__content .card .card__item .divButtons {
+    flex-direction: row;
+    gap: 0;
+  }
+  .wrapper .main .list-container .list .list__content .card .card__item .text {
+    width: auto;
   }
   .wrapper .main .list-container .swiper-pagination {
     position: absolute;
@@ -319,6 +359,10 @@ html {
   }
   .wrapper .main .list-container .list {
     max-width: 85%;
+  }
+  .wrapper .main .list-container .list .list__content .card .card__item .divButtons {
+    flex-direction: column;
+    gap: 4px;
   }
   .wrapper .main .list-container .swiper-pagination {
     position: absolute;
