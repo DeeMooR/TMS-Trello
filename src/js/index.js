@@ -67,8 +67,8 @@ document.addEventListener('click', ({target}) => {
         confirmDescriptionBtn.classList.add('description-confirm-btn')
         windowDescription.style.display = 'flex'
         backdropOn()
-        descriptionTitle.value = '123'
-        descriptionText.value = '123'
+        // descriptionTitle.value = ''
+        // descriptionText.value = ''
     }
     // удаление всех выполненных карточек
     if (target == deleteAllBtn) {
