@@ -92,9 +92,7 @@
   font-size: 14px;
   width: 130px;
   text-align: center;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   padding-right: 10px;
 }
 @media (max-width: 560px) {
@@ -152,6 +150,10 @@
   .window-warning {
     width: 95%;
   }
+}
+.window-warning .warning__text {
+  line-height: 1.5;
+  padding: 0 30px;
 }
 .window-warning .warning__buttons {
   display: flex;

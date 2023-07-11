@@ -10,8 +10,16 @@
 </head>
 <body>
     <div class="window-description description">
-        <input name="textfield" type="text" class="description__title" placeholder="Title"></input>
-        <input name="textfield" type="text" class="description__text" placeholder="Description" maxlength="80">
+        <input name="textfield" 
+               type="text" 
+               class="description__title" 
+               placeholder="Title">
+
+        <input name="textfield" 
+               type="text" 
+               class="description__text" 
+               placeholder="Description">
+               
         <div class="description__footer">
             <div class="description__selector">
                 <select name="description__users">
@@ -38,7 +46,12 @@
     <div class="wrapper">
         <header class="header">
             <div class="logo-trello">Trello</div>
-            <div class="clock">12:34</div>
+            <div class="search-clock">
+                <input type="search" 
+                       placeholder="Search todo" 
+                       class="search-todo">
+                <div class="clock">12:34</div>
+            </div>
         </header>
         
         <main class="main">
@@ -47,19 +60,22 @@
                     <div class="list-add__header list__header">
                         TODO:<span class="list-add__header-number list__header-number">2</span>
                     </div>
-                    <div class="list-add__content list__content">
+                    <div class="list-add__content list__content"
+                         ondragover="onDragOver(event);"
+                         ondrop="onDrop(event);">
                     </div>
                     <div class="list-add__footer list__footer">
                         <button type="button" class="list__btn add-btn">Add todo</button>
                     </div>
                 </div>
 
-                <div class="list-progress list">
+                <div class="list-progress list">                     
                     <div class="list-progress__header list__header">
                         IN PROGRESS:<span class="list-progress__header-number list__header-number">1</span>
                     </div>
-                    <div class="list-progress__content list__content">
-
+                    <div class="list-progress__content list__content"
+                         ondragover="onDragOver(event);"
+                         ondrop="onDrop(event);">
                     </div>
                 </div>
 
@@ -67,8 +83,9 @@
                     <div class="list-done__header list__header">
                         DONE:<span class="list-done__header-number list__header-number">1</span>
                     </div>
-                    <div class="list-done__content list__content">
-
+                    <div class="list-done__content list__content"
+                         ondragover="onDragOver(event);"
+                         ondrop="onDrop(event);">
                     </div>
                     <div class="list-done__footer list__footer">
                         <button type="button" class="list__btn delete-all-btn">Delete all</button>
