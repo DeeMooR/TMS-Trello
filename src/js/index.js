@@ -158,6 +158,17 @@ function createCard() {
     todos.push(todo)
     console.log(todos);
 
+    function textlow (element) {
+        var text = spanDescription.innerHTML;
+        if (text.length > 100) {
+        element.innerText = text.substring(0, 15) + "...";
+        } else {
+        element.innerText = text;
+        }
+    }
+
+    textlow (spanDescription)
+
     document.addEventListener('click', (event) => {
         if (event.target == editBtn) {
             let todoCell = event.target.closest('.list-add__card');
