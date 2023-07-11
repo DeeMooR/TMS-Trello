@@ -1,4 +1,4 @@
-import {getTimeForClock} from "./clock.js";
+import {clock} from "./clock.js";
 import {checkWindowSize} from "./swiper.js";
 import {inputSearch, search} from "./search.js";
 import {getUserName} from "./users.js";
@@ -124,7 +124,7 @@ document.addEventListener('click', ({target}) => {
     }
 })
 
-getTimeForClock();
+// getTimeForClock();
 
 export let userName = [];
 
