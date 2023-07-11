@@ -44,8 +44,10 @@
     <div class="backdrop"></div>
 
     <div class="wrapper">
-        <header class="header">
-            <div class="logo-trello">Trello</div>
+        <header class="header matovoye-steklo">
+            <div class="logo-trello">
+                <img src="./img/Trello-logo.png" alt="">
+            </div>
             <div class="search-clock">
                 <input type="search" 
                        placeholder="Search todo" 
@@ -56,21 +58,21 @@
         
         <main class="main">
             <div class="list-container">
-                <div class="list-add list">
-                    <div class="list-add__header list__header">
+                <div class="list-add list matovoye-steklo">
+                    <div class="list-add__header list__header sticky-top">
                         TODO:<span class="list-add__header-number list__header-number">2</span>
                     </div>
                     <div class="list-add__content list__content"
                          ondragover="onDragOver(event);"
                          ondrop="onDrop(event);">
                     </div>
-                    <div class="list-add__footer list__footer">
+                    <div class="list-add__footer list__footer sticky-bottom">
                         <button type="button" class="list__btn add-btn">Add todo</button>
                     </div>
                 </div>
 
-                <div class="list-progress list">                     
-                    <div class="list-progress__header list__header">
+                <div class="list-progress list matovoye-steklo">                     
+                    <div class="list-progress__header list__header sticky-top">
                         IN PROGRESS:<span class="list-progress__header-number list__header-number">1</span>
                     </div>
                     <div class="list-progress__content list__content"
@@ -79,15 +81,15 @@
                     </div>
                 </div>
 
-                <div class="list-done list">
-                    <div class="list-done__header list__header">
+                <div class="list-done list matovoye-steklo">
+                    <div class="list-done__header list__header sticky-top">
                         DONE:<span class="list-done__header-number list__header-number">1</span>
                     </div>
                     <div class="list-done__content list__content"
                          ondragover="onDragOver(event);"
                          ondrop="onDrop(event);">
                     </div>
-                    <div class="list-done__footer list__footer">
+                    <div class="list-done__footer list__footer sticky-bottom">
                         <button type="button" class="list__btn delete-all-btn">Delete all</button>
                     </div>
                 </div>
@@ -97,5 +99,8 @@
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script type="module" src="./js/index.js"></script>
+    <script>
+        
+    </script>
 </body>
 </html>
