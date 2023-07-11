@@ -131,20 +131,20 @@
   margin: 0 1rem;
   position: relative;
 }
-.wrapper .main .list-container .list .list__content .card .card__item .spanTitle {
+.wrapper .main .list-container .list .list__content .card .card__item .title {
   display: inline-block;
   word-break: break-all;
   padding: 0.5rem 0;
-  max-height: 50px;
+  max-height: 49px;
   overflow: hidden;
 }
-.wrapper .main .list-container .list .list__content .card .card__item .spanDescription {
+.wrapper .main .list-container .list .list__content .card .card__item .text {
   display: inline-block;
   width: auto;
   word-break: break-all;
   line-height: 1.2;
   padding: 0.5rem 0;
-  max-height: 130px;
+  max-height: 155px;
   overflow: hidden;
 }
 .wrapper .main .list-container .list .list__content .card .card__item .divButtons {
@@ -218,6 +218,13 @@
 }
 
 @media only screen and (max-width: 959px) {
+  .wrapper .main .list-container .list .list__content .card .card__item .title {
+    max-height: 40px;
+  }
+  .wrapper .main .list-container .list .list__content .card .card__item .text {
+    font-size: 16px;
+    max-height: 170px;
+  }
   .wrapper .main .list-container .list .list__content .card .card__item .divButtons {
     flex-direction: column;
     gap: 4px;
@@ -246,7 +253,7 @@
     flex-direction: row;
     gap: 0;
   }
-  .wrapper .main .list-container .list .list__content .card .card__item .spanDescription {
+  .wrapper .main .list-container .list .list__content .card .card__item .text {
     width: auto;
   }
   .wrapper .main .list-container .swiper-pagination {
@@ -265,6 +272,10 @@
 @media only screen and (max-width: 500px) {
   .wrapper .main .list-container .list {
     max-width: 70%;
+  }
+  .wrapper .main .list-container .list .list__content .card .card__item .divButtons {
+    flex-direction: column;
+    gap: 4px;
   }
   .wrapper .main .list-container .swiper-pagination {
     position: absolute;
