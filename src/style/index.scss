@@ -14,8 +14,12 @@ $list-done-background-color-active: 0px 0px 10px 0px rgb(88, 134, 163) inset;
 $card-item-btn-box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
 
 html {
-    background:linear-gradient(45deg, #ff9f1a, #70b500, #2ACCE5, #0079bf, #315989, #c377e0);
+    background:linear-gradient(45deg, #70b500, #2ACCE5, #0079bf, #315989, #c377e0);
     background-attachment: fixed;
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
 }
 
 .wrapper {

@@ -1,8 +1,12 @@
 @import url("./fonts.css");
 @import url("./nulling_style.css");
 html {
-  background: linear-gradient(45deg, #ff9f1a, #70b500, #2ACCE5, #0079bf, #315989, #c377e0);
+  background: linear-gradient(45deg, #70b500, #2ACCE5, #0079bf, #315989, #c377e0);
   background-attachment: fixed;
+}
+html ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .wrapper {
@@ -233,14 +237,12 @@ html {
 }
 
 .sticky-bottom {
-  position: -webkit-sticky;
   position: sticky;
   bottom: 0;
   z-index: 2;
 }
 
 .sticky-top {
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 2;

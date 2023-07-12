@@ -99,6 +99,9 @@ document.addEventListener('click', ({target}) => {
         if (flag.key == true) {
             listAddCounter.innerHTML = ++listAddCounter.innerHTML;
             createCard()
+            descriptionTitle.value = '';
+            descriptionText.value = '';
+            user.value = '';
         }
     }
     // закрыть модальное окно Warning
