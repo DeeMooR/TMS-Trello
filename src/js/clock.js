@@ -35,8 +35,6 @@ class Clock {
         .replace('h', hours)
         .replace('m', mins)
         // .replace('s', secs);
-  
-        console.log(output);
         clockTime.innerHTML = output
     }
   

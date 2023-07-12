@@ -1,5 +1,9 @@
 import { listDoneContent, listContent, listProgress, listAddCounter, listProgressCounter, listDoneCounter, todos, windowDescription, backdropOn, backdropOff, descriptionTitle, descriptionText, confirmDescriptionBtn, user, flag} from "./index.js"
-import {windowWarning, confirmWarningBtn, warningText} from "./index.js"
+import { windowWarning, confirmWarningBtn, warningText } from "./index.js"
+import { dragDrop } from "./drag-and-drop.js"
+
+let divButtons, cardItemDescription, backBtn, comleteBtn, applyBtn, editBtn, deleteBtn;
+export { divButtons, cardItemDescription, backBtn, comleteBtn, applyBtn, editBtn, deleteBtn };
 
 export function setName() {
     localStorage.setItem('todos', JSON.stringify(todos))
@@ -12,14 +16,13 @@ export function getName() {
         let cardNew = document.createElement('div')
         cardNew.classList.add('list-add__card', 'card')
         cardNew[index]
-        cardNew.setAttribute('id', 'draggable')
+        cardNew.setAttribute('id', `draggable-${index}`)
         cardNew.draggable = true
-        cardNew.setAttribute('ondragstart', 'onDragStart(event);')
     
         let cardItemTitle = document.createElement('div')
         cardItemTitle.setAttribute('class', 'card__item')
     
-        let cardItemDescription = document.createElement('div')
+        cardItemDescription = document.createElement('div')
         cardItemDescription.setAttribute('class', 'card__item')
     
         let cardItemUser = document.createElement('div')
@@ -29,25 +32,25 @@ export function getName() {
         spanTitle.classList.add('title')
         spanTitle.innerHTML = array[index].title
     
-        let divButtons = document.createElement('div')
-        divButtons.classList.add('divButtons')
+        divButtons = document.createElement('div')
+        divButtons.classList.add('divButtons', `db-${index}`)
 
     
-        let editBtn = document.createElement('button')
+        editBtn = document.createElement('button')
         editBtn.setAttribute('type', 'button')
-        editBtn.classList.add('card-item__btn', 'edit-btn')
+        editBtn.classList.add('card-item__btn', 'edit-btn', `eda-${index}`)
         editBtn.innerHTML = 'EDIT'
     
-        let deleteBtn = document.createElement('button')
-        deleteBtn.classList.add('card-item__btn', 'delete-btn')
+        deleteBtn = document.createElement('button')
+        deleteBtn.classList.add('card-item__btn', 'delete-btn', `eda-${index}`)
         deleteBtn.innerHTML = 'DELETE'
     
         let spanDescription = document.createElement('span')
         spanDescription.classList.add('text')
         spanDescription.innerHTML = array[index].text
         
-        let applyBtn = document.createElement('button')
-        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
+        applyBtn = document.createElement('button')
+        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply', `eda-${index}`)
         applyBtn.innerHTML = '>'
     
         let spanUser = document.createElement('span')
@@ -58,12 +61,12 @@ export function getName() {
         divDate.setAttribute('class', 'date')
         divDate.innerHTML = array[index].time
     
-        let backBtn = document.createElement('button')
-        backBtn.classList.add('card-item__btn', 'back-btn')
+        backBtn = document.createElement('button')
+        backBtn.classList.add('card-item__btn', 'back-btn', `bc-${index}`)
         backBtn.innerHTML = 'BACK'
             
-        let comleteBtn = document.createElement('button')
-        comleteBtn.classList.add('card-item__btn', 'comlete-btn')
+        comleteBtn = document.createElement('button')
+        comleteBtn.classList.add('card-item__btn', 'comlete-btn', `bc-${index}`)
         comleteBtn.innerHTML = 'COMPLETE'
     
         divButtons.append(editBtn, deleteBtn)
@@ -207,5 +210,6 @@ export function getName() {
                 setName()
             }
         })    
+        dragDrop(index, todoNew);
     })
 }

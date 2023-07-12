@@ -1,11 +1,15 @@
 @import url("./fonts.css");
 @import url("./nulling_style.css");
+html {
+  background: linear-gradient(45deg, #ff9f1a, #70b500, #2ACCE5, #0079bf, #315989, #c377e0);
+  background-attachment: fixed;
+}
+
 .wrapper {
   font-family: Raleway;
   min-width: 0;
   width: calc(100vw - 20px);
-  overflow-x: hidden;
-  padding: 0 1rem;
+  padding: 1rem;
 }
 .wrapper .header {
   display: flex;
@@ -14,10 +18,9 @@
   max-width: 1170px;
   width: 100%;
   height: 150px;
-  margin: 1.4rem auto;
+  margin: 0 auto;
+  margin-bottom: 1.4rem;
   border-radius: 2.1rem;
-  background-color: rgb(216, 184, 246);
-  border: 1px solid rgb(189, 121, 253);
 }
 @media (max-width: 400px) {
   .wrapper .header {
@@ -26,12 +29,16 @@
   }
 }
 .wrapper .header .logo-trello {
-  font-size: 2.5rem;
   margin: 1.4rem;
+  width: 20%;
+}
+.wrapper .header .logo-trello img {
+  width: 100%;
 }
 .wrapper .header .search-clock {
   display: flex;
   justify-content: space-between;
+  width: 50%;
 }
 @media (max-width: 400px) {
   .wrapper .header .search-clock {
@@ -80,7 +87,10 @@
   max-width: 300px;
   width: 100%;
   border-radius: 10px;
-  background-color: rgb(200, 200, 200);
+}
+.wrapper .main .list-container .list:hover {
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .wrapper .main .list-container .list .list__header {
   display: flex;
@@ -161,6 +171,10 @@
 .wrapper .main .list-container .list .list__content .card .card__item .card-item__btn:active {
   box-shadow: 0px 0px 5px 0px rgb(129, 129, 129) inset;
 }
+.wrapper .main .list-container .list .list__content .card .card__item .card-item__btn:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
 .wrapper .main .list-container .list .list__content .card .card__item .card-item__btn-apply {
   padding: 0.8rem 0.6rem;
   font-size: 1.2rem;
@@ -180,7 +194,8 @@
 }
 .wrapper .main .list-container .list .list-progress__content {
   min-height: 395px;
-  padding-bottom: 65px;
+  padding-bottom: 10px;
+  justify-content: flex-start;
 }
 .wrapper .main .list-container .list .list__footer {
   width: 100%;
@@ -214,7 +229,44 @@
   box-shadow: 0px 0px 10px 0px rgb(88, 134, 163) inset;
 }
 .wrapper .main .list-container .list-progress {
-  border-radius: 50px;
+  border-radius: 10px;
+}
+
+.sticky-bottom {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+.sticky-top {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.frosted-glass {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 1rem 0 rgba(41, 39, 39, 0.2);
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  background: inherit;
+}
+
+.frosted-glass:before {
+  content: "";
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: inset 0 0 2000px rgba(241, 241, 241, 0.5);
+  filter: blur(10px);
 }
 
 @media only screen and (max-width: 959px) {
@@ -237,6 +289,13 @@
   .wrapper .header {
     margin: 1.4rem auto 5.5rem;
     width: 95%;
+  }
+  .wrapper .header .logo-trello {
+    margin: 1.4rem;
+    width: 30%;
+  }
+  .wrapper .header .logo-trello img {
+    width: 100%;
   }
   .wrapper .header .clock {
     width: calc(10% + 2.5rem);
@@ -261,7 +320,8 @@
     bottom: calc(100% - 250px);
   }
   .wrapper .main .list-container .swiper-pagination .swiper-pagination-bullet {
-    background-color: white;
+    background-color: inherit;
+    color: white;
     width: 9.8rem;
     height: 2.85rem;
     font-size: 1.4rem;
@@ -270,6 +330,25 @@
   }
 }
 @media only screen and (max-width: 500px) {
+  .wrapper .header {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wrapper .header .logo-trello {
+    margin: 0;
+    width: 40%;
+  }
+  .wrapper .header .search-clock {
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .wrapper .header .search-clock .clock {
+    margin: 0;
+    width: 20%;
+  }
+  .wrapper .header .search-clock .search-todo {
+    width: 70%;
+  }
   .wrapper .main .list-container .list {
     max-width: 70%;
   }
@@ -288,6 +367,15 @@
   }
 }
 @media only screen and (max-width: 363px) {
+  .wrapper .header .logo-trello {
+    width: 50%;
+  }
+  .wrapper .header .search-clock .clock {
+    width: 30%;
+  }
+  .wrapper .header .search-clock .search-todo {
+    width: 60%;
+  }
   .wrapper .main .list-container .list {
     max-width: 83%;
   }
