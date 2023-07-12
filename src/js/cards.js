@@ -112,6 +112,9 @@ export function createCard() {// создание новой карточки
                         spanDescription.innerHTML = descriptionText.value;
                         spanUser.innerHTML = user.value;
                         flag.key = true;
+                        descriptionTitle.value = '';
+                        descriptionText.value = '';
+                        user.value = '';
                     }
                     document.removeEventListener('click', confirmDescriptionBtnEvent);
                 }
