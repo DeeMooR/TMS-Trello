@@ -22,6 +22,7 @@ checkWindowSize();//проверяем размер при загрузке ст
 
 window.addEventListener('resize', checkWindowSize);//проверка размера при изменении ширины страницы
 
+
 //карточка "Task"
 let listAddContent = document.querySelector('.list-add')
 export let listContent = document.querySelector('.list-add__content')
@@ -98,6 +99,9 @@ document.addEventListener('click', ({target}) => {
         if (flag.key == true) {
             listAddCounter.innerHTML = ++listAddCounter.innerHTML;
             createCard()
+            descriptionTitle.value = '';
+            descriptionText.value = '';
+            user.value = '';
         }
     }
     // закрыть модальное окно Warning
@@ -138,25 +142,3 @@ for (let i = 0; i < userName.length; i++) {//добваление имен из 
 }
 
 if (localStorage.getItem('todos')) getName()
-
-function onDragStart(event) {
-    event
-      .dataTransfer
-      .setData('text/plain', event.target.id);
-}
-function onDragOver(event) {
-    event.preventDefault();
-}
-function onDrop(event) {
-    const id = event
-        .dataTransfer
-        .getData('text');
-
-    const draggableElement = document.getElementById(id);
-    const dropzone = event.target;
-    dropzone.appendChild(draggableElement);
-
-    event
-    .dataTransfer
-    .clearData();
-}

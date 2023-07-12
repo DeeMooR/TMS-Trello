@@ -7,7 +7,7 @@ export function createCard() {// создание новой карточки
     card.classList.add('list-add__card', 'card')
     card.setAttribute('id', 'draggable')
     card.draggable = true
-    card.setAttribute('ondragstart', 'onDragStart(event);')
+    //card.setAttribute('ondragstart', 'onDragStart(event);')
 
     let cardItemTitle = document.createElement('div')
     cardItemTitle.setAttribute('class', 'card__item')

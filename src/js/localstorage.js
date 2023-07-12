@@ -1,5 +1,5 @@
 import { listDoneContent, listContent, listProgress, listAddCounter, listProgressCounter, listDoneCounter, todos, windowDescription, backdropOn, backdropOff, descriptionTitle, descriptionText, confirmDescriptionBtn, user, flag} from "./index.js"
-import {windowWarning, confirmWarningBtn, warningText} from "./index.js"
+import { windowWarning, confirmWarningBtn, warningText } from "./index.js"
 
 export function setName() {
     localStorage.setItem('todos', JSON.stringify(todos))
@@ -12,9 +12,8 @@ export function getName() {
         let cardNew = document.createElement('div')
         cardNew.classList.add('list-add__card', 'card')
         cardNew[index]
-        cardNew.setAttribute('id', 'draggable')
+        cardNew.setAttribute('id', `draggable-${index}`)
         cardNew.draggable = true
-        cardNew.setAttribute('ondragstart', 'onDragStart(event);')
     
         let cardItemTitle = document.createElement('div')
         cardItemTitle.setAttribute('class', 'card__item')
@@ -30,16 +29,16 @@ export function getName() {
         spanTitle.innerHTML = array[index].title
     
         let divButtons = document.createElement('div')
-        divButtons.classList.add('divButtons')
+        divButtons.classList.add('divButtons', `db-${index}`)
 
     
         let editBtn = document.createElement('button')
         editBtn.setAttribute('type', 'button')
-        editBtn.classList.add('card-item__btn', 'edit-btn')
+        editBtn.classList.add('card-item__btn', 'edit-btn', `eda-${index}`)
         editBtn.innerHTML = 'EDIT'
     
         let deleteBtn = document.createElement('button')
-        deleteBtn.classList.add('card-item__btn', 'delete-btn')
+        deleteBtn.classList.add('card-item__btn', 'delete-btn', `eda-${index}`)
         deleteBtn.innerHTML = 'DELETE'
     
         let spanDescription = document.createElement('span')
@@ -47,7 +46,7 @@ export function getName() {
         spanDescription.innerHTML = array[index].text
         
         let applyBtn = document.createElement('button')
-        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply')
+        applyBtn.classList.add('card-item__btn', 'card-item__btn-apply', `eda-${index}`)
         applyBtn.innerHTML = '>'
     
         let spanUser = document.createElement('span')
@@ -59,11 +58,11 @@ export function getName() {
         divDate.innerHTML = array[index].time
     
         let backBtn = document.createElement('button')
-        backBtn.classList.add('card-item__btn', 'back-btn')
+        backBtn.classList.add('card-item__btn', 'back-btn', `bc-${index}`)
         backBtn.innerHTML = 'BACK'
             
         let comleteBtn = document.createElement('button')
-        comleteBtn.classList.add('card-item__btn', 'comlete-btn')
+        comleteBtn.classList.add('card-item__btn', 'comlete-btn', `bc-${index}`)
         comleteBtn.innerHTML = 'COMPLETE'
     
         divButtons.append(editBtn, deleteBtn)
@@ -206,6 +205,65 @@ export function getName() {
                 todoNew.status = 'Done'
                 setName()
             }
-        })    
+        })
+        function dragDrop() {
+            const dragEl = document.getElementById(`draggable-${index}`)
+        
+            dragEl.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('id', e.target.id)
+            })
+        
+            listProgress.addEventListener('dragover', (e) => {
+                e.preventDefault();                
+            })
+            listContent.addEventListener('dragover', (e) => {
+                e.preventDefault();                
+            })
+            listDoneContent.addEventListener('dragover', (e) => {
+                e.preventDefault();                
+            })
+        
+            listContent.addEventListener('drop', (e) => {
+                let itemId = e.dataTransfer.getData('id')
+                let itemCard = document.getElementById(itemId)
+                itemCard.style.backgroundColor = 'rgb(152, 223, 138)'
+                document.querySelectorAll(`.bc-${index}`).forEach( e => e.remove() )
+                divButtons.append(editBtn, deleteBtn)
+                cardItemDescription.append(applyBtn)
+                listContent.prepend(itemCard)
+                todoNew.status = 'Task'
+                // setName()
+            })
+            listProgress.addEventListener('drop', (e) => {
+                let itemId = e.dataTransfer.getData('id')
+                let itemCard = document.getElementById(itemId)
+                itemCard.style.backgroundColor = 'rgb(240, 240, 255)'
+                document.querySelectorAll(`.eda-${index}`).forEach( e => e.remove() )
+                divButtons.append(backBtn, comleteBtn)
+                listProgress.prepend(itemCard)
+                todoNew.status = 'In progress'
+                // setName()
+            })
+            listDoneContent.addEventListener('drop', (e) => {
+                let itemId = e.dataTransfer.getData('id')
+                let itemCard = document.getElementById(itemId)
+                itemCard.style.backgroundColor = 'rgb(135, 206, 250)'            
+                // backBtn.remove()
+                // comleteBtn.remove()
+                // divButtons.append(deleteBtn)
+                listDoneContent.append(itemCard)    
+                todoNew.status = 'Done'
+                // setName()
+                // dragEl.draggable = false
+                for (const child of listDoneContent.children) {
+                    child.draggable = false
+                }
+        
+            })
+            for (const child of listDoneContent.children) {
+                child.draggable = false
+            }
+        }    
+        dragDrop();
     })
 }
