@@ -104,7 +104,6 @@ export function getName() {
         } 
     
         const todoNew = {}
-        // console.log(array[index].id);
         todoNew.id = array[index].id
         todoNew.user = array[index].user
         todoNew.title = array[index].title
@@ -116,7 +115,6 @@ export function getName() {
 
         document.addEventListener('click', (event) => {
             if (event.target == editBtn) {
-                // console.log(event.target);
                 windowDescription.style.display = 'flex'
                 backdropOn()
                 descriptionText.value = spanDescription.innerHTML
@@ -125,7 +123,6 @@ export function getName() {
                 flag.key = false
                 let confirmDescriptionBtnEvent = (event) => {
                     if (event.target === confirmDescriptionBtn && descriptionTitle.value.trim() !== '' && descriptionText.value.trim() !== '' && user.value !== '') {
-                        // console.log(event.target);
                         if(item.id) {
                             windowDescription.style.display = 'none';
                             backdropOff();
@@ -232,7 +229,6 @@ export function getName() {
                 cardItemDescription.append(applyBtn)
                 listContent.prepend(itemCard)
                 todoNew.status = 'Task'
-                // setName()
             })
             listProgress.addEventListener('drop', (e) => {
                 let itemId = e.dataTransfer.getData('id')
@@ -242,19 +238,13 @@ export function getName() {
                 divButtons.append(backBtn, comleteBtn)
                 listProgress.prepend(itemCard)
                 todoNew.status = 'In progress'
-                // setName()
             })
             listDoneContent.addEventListener('drop', (e) => {
                 let itemId = e.dataTransfer.getData('id')
                 let itemCard = document.getElementById(itemId)
                 itemCard.style.backgroundColor = 'rgb(135, 206, 250)'            
-                // backBtn.remove()
-                // comleteBtn.remove()
-                // divButtons.append(deleteBtn)
                 listDoneContent.append(itemCard)    
                 todoNew.status = 'Done'
-                // setName()
-                // dragEl.draggable = false
                 for (const child of listDoneContent.children) {
                     child.draggable = false
                 }

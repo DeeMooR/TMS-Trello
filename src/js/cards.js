@@ -2,12 +2,11 @@ import { listDoneContent, listContent, listProgress, listAddCounter, listProgres
 import {setName} from "./localstorage.js";
 import {windowWarning, confirmWarningBtn, warningText} from "./index.js"
 
-export function createCard() {// создание новой карточки
+export function createCard() {
     let card = document.createElement('div')
     card.classList.add('list-add__card', 'card')
     card.setAttribute('id', 'draggable')
     card.draggable = true
-    //card.setAttribute('ondragstart', 'onDragStart(event);')
 
     let cardItemTitle = document.createElement('div')
     cardItemTitle.setAttribute('class', 'card__item')
@@ -181,6 +180,5 @@ export function createCard() {// создание новой карточки
             setName()
         }
     })
-    
     setName()
 }

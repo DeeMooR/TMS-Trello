@@ -33,8 +33,8 @@ export function initSwiper() {
     swiperWrapper.append(swiperSlideDone);
 
     mySwiper = new Swiper('.swiper-container', {
-        slidesPerView: 1, //кол-во слайдов на странице
-        initialSlide: 0,// какой слайд показан
+        slidesPerView: 1,
+        initialSlide: 0,
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
