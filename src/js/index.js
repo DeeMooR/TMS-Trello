@@ -70,6 +70,12 @@ document.addEventListener('click', ({target}) => {
     }
     if (target == cancelDescriptionBtn) {
         windowDescription.style.display = 'none'
+        descriptionTitle.value = '';
+        descriptionText.value = '';
+        user.value = '';
+        descriptionTitle.style.borderColor = 'black'
+        descriptionText.style.borderColor = 'black'
+        user.style.borderColor = 'black'
         backdropOff()
         flag.key = true
     }
@@ -86,6 +92,22 @@ document.addEventListener('click', ({target}) => {
             descriptionTitle.value = '';
             descriptionText.value = '';
             user.value = '';
+        }
+    } else if (target == confirmDescriptionBtn) { 
+        if (descriptionTitle.value.trim() == '') {
+            descriptionTitle.style.borderColor = 'red'
+        } else {
+            descriptionTitle.style.borderColor = 'black'
+        }
+        if (descriptionText.value.trim() == '') {
+            descriptionText.style.borderColor = 'red'
+        } else {
+            descriptionText.style.borderColor = 'black'
+        }
+        if (user.value == '') {
+            user.style.borderColor = 'red'
+        } else {
+            user.style.borderColor = 'black'
         }
     }
     if (target == cancelWarningBtn) {
