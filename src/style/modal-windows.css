@@ -51,12 +51,24 @@
   background-color: white;
   border-radius: 5px;
 }
+.window-description .description__title:invalid {
+  border: 2px dashed red;
+}
+.window-description .description__title:valid {
+  border: 2px solid black;
+}
 .window-description .description__text {
   width: 100%;
   height: 15vh;
   margin-top: 20px;
   background-color: white;
   border-radius: 20px;
+}
+.window-description .description__text:invalid {
+  border: 2px dashed lightcoral;
+}
+.window-description .description__text:valid {
+  border: 2px solid black;
 }
 .window-description .description__footer {
   display: flex;
@@ -92,9 +104,7 @@
   font-size: 14px;
   width: 130px;
   text-align: center;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   padding-right: 10px;
 }
 @media (max-width: 560px) {
